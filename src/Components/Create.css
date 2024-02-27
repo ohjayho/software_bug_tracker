@@ -1,0 +1,90 @@
+.create_wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.create_container {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.create_title {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.issue_form {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+.label {
+  width: 100px;
+}
+
+.inputs {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+input {
+  height: 32px;
+  padding: 0 5px;
+}
+
+.input_border {
+  border: 1px solid #b6b6b6;
+  border-radius: 5px;
+}
+
+#title {
+  flex: 1;
+}
+
+.create_select {
+  width: 100px;
+  height: 32px;
+  border: 1px solid #b6b6b6;
+  border-radius: 5px;
+}
+
+.create_status {
+  width: 150px;
+}
+
+#description {
+  flex: 1;
+  height: 200px;
+}
+
+.btn_issue {
+  color: white;
+  border: none;
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.btns {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+}
+
+.btn_issue:nth-child(2) {
+  margin-left: 10px;
+}
+
+.btn_issue_cancel {
+  background-color: #e4311f;
+}
+
+.btn_issue_submit {
+  background-color: #2ea043;
+}
