@@ -1,0 +1,57 @@
+.issue_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 100px;
+}
+
+.issue_container {
+  display: flex;
+  min-width: 500px;
+  max-width: 650px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.issue_label {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.issue_content {
+  margin-bottom: 20px;
+}
+
+.issue_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.issue_status_container {
+  display: flex;
+  align-items: center;
+}
+
+.status_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 20px;
+  color: white;
+}
+
+.status_box:first-child {
+  margin-right: 10px;
+}
+
+.open_status {
+  background-color: rgb(46, 160, 67);
+  text-transform: capitalize;
+}
+
+.severity_status {
+  background-color: rgb(192, 57, 43);
+  text-transform: capitalize;
+}
