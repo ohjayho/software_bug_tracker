@@ -4,13 +4,20 @@
 
 html,
 body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  height: 100%;
+}
+
+body {
+  display: flex;
 }
 
 #root {
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex-grow: 1;
 }
 
 a {
