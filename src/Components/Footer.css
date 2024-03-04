@@ -1,1 +1,24 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #273238;
+  color: white;
+  font-size: 14px;
+  width: 100%;
+  margin-top: auto;
+  min-height: 80px;
+}
 
+.footer_content:not(:last-child) {
+  margin-right: 20px;
+}
+
+.footer_links {
+  display: flex;
+}
+
+.footer_info {
+  margin-top: 10px;
+}
