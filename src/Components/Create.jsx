@@ -49,8 +49,7 @@ const Create = () => {
 
   return (
     <>
-      <Header />
-      <div className="create_wrapper">
+      <div className="main_content create_wrapper">
         <div className="create_container">
           <h1 className="create_title">Create an issue</h1>
           <form className="issue_form" onSubmit={handleCreate}>
