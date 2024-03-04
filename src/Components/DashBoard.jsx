@@ -3,6 +3,7 @@ import { Link, Navigate, Routes, Route } from "react-router-dom";
 import Header from "./Header";
 import IssueList from "./IssueList";
 import "./DashBoard.css";
+import Footer from "./Footer.jsx";
 
 const DashBoard = () => {
   const [authenticated, setAuthenticated] = useState(
@@ -20,8 +21,7 @@ const DashBoard = () => {
     );
     return (
       <>
-        <Header />
-        <div className="dashboard_container">
+        <div className="main_content dashboard_container">
           <div className="btns_dash">
             <div className="dash_sort">
               <button className="btn_sort btn_open">Open tickets</button>
@@ -76,7 +76,6 @@ const DashBoard = () => {
             </tbody>
           </table>
         </div>
-        <footer>this footer</footer>
       </>
     );
   }
