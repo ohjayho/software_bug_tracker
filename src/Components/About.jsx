@@ -1,18 +1,29 @@
-import Header from "./Header";
 import "./About.css";
 
 const About = () => {
   return (
     <>
-      <Header />
-      <div className="about_container">
-        <h1>Software Bug Tracker</h1>
+      <div className="main_content about_container">
+        <p>Welcome to our Bug Tracker!</p>
         <p>
-          This is a Software Bug Tracker, which tracks all the bugs existing in
-          this world.<br></br> Why do I need to use this bug tracker? <br></br>-
-          You tell me. There must be the reason why you end up here.<br></br>
-          How are you?<br></br>- I think I'm fine. and you?<br></br>So so.
-          <br></br>- Cool.
+          Our Bug Tracker is designed to help you manage and track software bugs
+          effectively.
+        </p>
+        <p>Features include:</p>
+        <ul>
+          <li>Creating new bug reports</li>
+          <li>Assigning bug reports to team members</li>
+          <li>Tracking the status of bug reports</li>
+          <li>Commenting and discussing bug reports</li>
+          <li>Searching and filtering bug reports</li>
+        </ul>
+        <p>
+          Our goal is to provide you with a user-friendly and efficient tool for
+          managing software bugs in your projects.
+        </p>
+        <p>
+          If you have any feedback or suggestions, please feel free to contact
+          us.
         </p>
       </div>
     </>
