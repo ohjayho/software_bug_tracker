@@ -28,8 +28,7 @@ const Issue = () => {
   };
   return (
     <>
-      <Header />
-      <div className="issue_wrapper">
+      <div className="main_content issue_wrapper">
         <div className="issue_container">
           <div className="issue_header issue_content">
             <div className="issue_status_container">
