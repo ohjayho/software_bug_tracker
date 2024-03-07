@@ -1,20 +1,40 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Header from "./Header";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Create.css";
 
 const Create = () => {
-  const [values, Setvalues] = useState({
-    id: "",
-    title: "",
-    severity: "critical",
-    reporter: "",
-    description: "",
-    time: "",
-    status: "to_do"
-  });
+  // if modifying
+  const location = useLocation().state;
+  const modify = location ? true : false;
+  console.log(location, modify);
+
+  const [values, Setvalues] = useState(
+    modify
+      ? {
+          id: location.id,
+          title: location.title,
+          severity: location.severity,
+          reporter: location.reporter,
+          description: location.description,
+          time: location.time,
+          status: location.status
+        }
+      : {
+          id: "",
+          title: "",
+          severity: "critical",
+          reporter: "",
+          description: "",
+          time: "",
+          status: "to_do"
+        }
+  );
 
   const navigate = useNavigate();
+
+  let issues = JSON.parse(localStorage.getItem("issues"));
+
+  const issue_num = issues.length === 0 ? 1 : issues[issues.length - 1].id + 1;
 
   const [isInitialRender, setIsInitialRender] = useState(true);
 
@@ -24,10 +44,19 @@ const Create = () => {
       return;
     }
 
-    localStorage.setItem(
-      "issues",
-      JSON.stringify([...JSON.parse(localStorage.getItem("issues")), values])
-    );
+    if (modify) {
+      issues.forEach((issue, idx) => {
+        if (issue.id === location.id) {
+          issues[idx] = values;
+          console.log("이슈", issue, "밸류", values);
+          console.log(issues + "hdlsfahjklvczx");
+        }
+      });
+      console.log("바뀐 ", issues);
+      localStorage.setItem("issues", JSON.stringify([...issues]));
+    } else {
+      localStorage.setItem("issues", JSON.stringify([...issues, values]));
+    }
 
     navigate("/dashboard");
   }, [values.time]);
@@ -38,13 +67,15 @@ const Create = () => {
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const year = date.getFullYear();
-    const id = Date.now();
-    Setvalues({ ...values, id: id, time: `${month}/${day}/${year}` });
+    const milli = date.getMilliseconds();
+    const id = modify ? location.id : issue_num;
+    Setvalues({ ...values, id: id, time: `${month}/${day}/${year}/${milli}` });
   };
 
   const onChange = (e) => {
-    Setvalues({ ...values, [e.target.name]: e.target.value });
-    console.log("onchnage");
+    const { name, value } = e.target;
+    console.log(`name:${name}, value:${value}`);
+    Setvalues((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
   return (
@@ -61,6 +92,7 @@ const Create = () => {
                 id="title"
                 className="input_border"
                 onChange={onChange}
+                defaultValue={modify ? location.title : ""}
                 required
               />
             </div>
@@ -70,6 +102,7 @@ const Create = () => {
                 name="severity"
                 className="create_select"
                 onChange={onChange}
+                defaultValue={modify ? location.severity : "critical"}
               >
                 <option value="critical">Critical</option>
                 <option value="urgent">Urgent</option>
@@ -82,6 +115,7 @@ const Create = () => {
                 name="status"
                 className="create_select create_status"
                 onChange={onChange}
+                defaultValue={modify ? location.status : "to_do"}
               >
                 <option value="to_do">TO DO</option>
                 <option value="in_progress">IN PROGRESS</option>
@@ -97,6 +131,7 @@ const Create = () => {
                 id="reporter"
                 className="input_border"
                 onChange={onChange}
+                defaultValue={modify ? location.reporter : ""}
                 required
               />
             </div>
@@ -107,6 +142,7 @@ const Create = () => {
                 id="description"
                 className="text_description input_border"
                 onChange={onChange}
+                defaultValue={modify ? location.description : ""}
                 required
               ></textarea>
             </div>
