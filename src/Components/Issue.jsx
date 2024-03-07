@@ -1,6 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Header from "./Header";
 import "./Issue.css";
 
 const Issue = () => {
@@ -22,10 +21,15 @@ const Issue = () => {
     navigate("/dashboard");
   }, [issues]);
 
+  const onModify = () => {
+    navigate("/create", { state: state });
+  };
+
   const onDelete = () => {
     const newIssues = issues.filter((issue) => issue.id !== id);
     setIssues(newIssues);
   };
+
   return (
     <>
       <div className="main_content issue_wrapper">
@@ -46,7 +50,9 @@ const Issue = () => {
           <div className="issue_label">Progress</div>
           <div className="issue_progress issue_content">IN PROGRESS</div>
           <div className="issue_btns">
-            <button className="btn_issue_modify btn_detail">Modify</button>
+            <button className="btn_issue_modify btn_detail" onClick={onModify}>
+              Modify
+            </button>
             <button className="btn_issue_delete btn_detail" onClick={onDelete}>
               Delete
             </button>
