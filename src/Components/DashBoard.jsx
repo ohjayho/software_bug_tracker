@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, Navigate, Routes, Route } from "react-router-dom";
-import Header from "./Header";
 import IssueList from "./IssueList";
 import "./DashBoard.css";
-import Footer from "./Footer.jsx";
 
 const DashBoard = () => {
   const [authenticated, setAuthenticated] = useState(
@@ -65,7 +63,7 @@ const DashBoard = () => {
             </thead>
             <tbody>
               {issues.length ? (
-                issues.map((issue) => {
+                issues.reverse().map((issue) => {
                   return <IssueList key={issue.id} issue={issue}></IssueList>;
                 })
               ) : (
