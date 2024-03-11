@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./LoginForm.css";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, Link } from "react-router-dom";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -9,15 +9,22 @@ const LoginForm = () => {
   const [authenticated, setAuthenticated] = useState(
     localStorage.getItem("authenticated") || false
   );
-  const users = [{ username: "admin", password: "123" }];
-  console.log("helo!");
+  const users = JSON.parse(localStorage.getItem("users"));
+  console.log(users, "유저");
+
   const handleLogin = (e) => {
-    const account = users.find((user) => user.username === username);
-    if (account && account.password === password) {
+    e.preventDefault();
+    if (users.length !== 0) {
+      navigate("/login");
+    }
+    const account = users.find((user) => user.id === username);
+    console.log(account);
+    if (account && account.pw === password) {
       localStorage.setItem("authenticated", true);
       navigate("/dashboard");
     }
   };
+
   if (authenticated === "true") {
     return <Navigate to="/dashboard" />;
   }
@@ -27,7 +34,7 @@ const LoginForm = () => {
         <h1 className="login_title">Software Bug Tracker</h1>
         <div className="login_container">
           <div className="input_container">
-            <label className="input_label" for="id">
+            <label className="input_label" htmlFor="id">
               ID
             </label>
             <input
@@ -39,7 +46,7 @@ const LoginForm = () => {
             ></input>
           </div>
           <div className="input_container">
-            <label className="input_label" for="password">
+            <label className="input_label" htmlFor="password">
               Password
             </label>
             <input
@@ -54,7 +61,9 @@ const LoginForm = () => {
             <button className="login_btn">Login</button>
             <div className="signup_container">
               <h5 className="signup_msg">Don't have an account?</h5>
-              <h5 className="signup_msg signup_click">Sign up!</h5>
+              <h5 className="signup_msg signup_click">
+                <Link to={"/signup"}>Sign up!</Link>
+              </h5>
             </div>
           </div>
         </div>
