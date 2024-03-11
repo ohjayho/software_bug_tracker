@@ -8,6 +8,7 @@ import Issue from "./Components/Issue.jsx";
 import ErrorPage from "./Components/ErrorPage.jsx";
 import Header from "./Components/Header.jsx";
 import Footer from "./Components/Footer.jsx";
+import SignUpForm from "./Components/SignUpForm.jsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<LoginForm />} />
+        <Route path="/signup" element={<SignUpForm />} />
         <Route path="/about" element={<About />} />
         <Route path="/dashboard" element={<DashBoard />}></Route>
         <Route path="/dashboard/issue/:id" element={<Issue />} />
