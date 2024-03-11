@@ -4,10 +4,8 @@ import IssueList from "./IssueList";
 import "./DashBoard.css";
 
 const DashBoard = () => {
-  const [authenticated, setAuthenticated] = useState(
-    localStorage.getItem("authenticated")
-  );
-  if (authenticated === "false") {
+  const authenticated = localStorage.getItem("authenticated");
+  if (authenticated !== "true") {
     return <Navigate to="/" />;
   } else {
     if (!localStorage.getItem("issues")) {
