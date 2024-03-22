@@ -1,22 +1,20 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate, Navigate } from "react-router-dom";
 import "./Create.css";
+import { v4 as uuidv4 } from "uuid";
 
 const Create = () => {
   const authenticated = localStorage.getItem("authenticated");
   if (authenticated !== "true") {
     return <Navigate to="/" />;
   } else {
-    // if modifying
+    // if modify
     const location = useLocation().state;
     const modify = location ? true : false;
-    console.log(location, modify);
-
-    const [values, Setvalues] = useState(
+    const [values, setValues] = useState(
       modify
         ? {
-            id: location.id,
-            title: location.title,
+            title: location.id,
             severity: location.severity,
             reporter: location.reporter,
             description: location.description,
@@ -24,49 +22,42 @@ const Create = () => {
             status: location.status
           }
         : {
-            id: "",
             title: "",
-            severity: "critical",
+            severity: "CRITICAL",
             reporter: "",
             description: "",
             time: "",
-            status: "to_do"
+            status: "TO DO"
           }
     );
 
     const navigate = useNavigate();
 
-    let issues = JSON.parse(localStorage.getItem("issues"));
-
-    console.log("test,", issues);
-
-    const issue_num =
-      issues.length === 0 ? 1 : issues[issues.length - 1].id + 1;
+    const [issues, setIssues] = useState(
+      JSON.parse(localStorage.getItem("issues"))
+    );
 
     const [isInitialRender, setIsInitialRender] = useState(true);
 
     useEffect(() => {
       if (isInitialRender) {
+        // to prevent the initial execution of the code
         setIsInitialRender(false);
         return;
       }
 
       if (modify) {
+        // if this is the modifying mode
         issues.forEach((issue, idx) => {
           if (issue.id === location.id) {
             issues[idx] = values;
-            console.log("이슈", issue, "밸류", values);
-            console.log(issues + "hdlsfahjklvczx");
           }
         });
-        console.log("바뀐 ", issues);
-        localStorage.setItem("issues", JSON.stringify([...issues]));
-      } else {
-        localStorage.setItem("issues", JSON.stringify([...issues, values]));
       }
+      localStorage.setItem("issues", JSON.stringify(issues));
 
       navigate("/dashboard");
-    }, [values.time]);
+    }, [issues]);
 
     const handleCreate = (e) => {
       e.preventDefault();
@@ -74,26 +65,30 @@ const Create = () => {
       const month = date.getMonth() + 1;
       const day = date.getDate();
       const year = date.getFullYear();
-      const milli = date.getMilliseconds();
-      const id = modify ? location.id : issue_num;
-      Setvalues({
-        ...values,
-        id: id,
-        time: `${month}/${day}/${year}/${milli}`
+      const id = uuidv4();
+      setValues((prevValue) => {
+        const updatedValues = {
+          ...prevValue,
+          id: id,
+          time: `${month}/${day}/${year}`
+        };
+        // put setIssues inside setValues to make sure setIssues after setValues
+        setIssues([...issues, updatedValues]);
       });
     };
 
     const onChange = (e) => {
       const { name, value } = e.target;
-      console.log(`name:${name}, value:${value}`);
-      Setvalues((prevValues) => ({ ...prevValues, [name]: value }));
+      setValues((prevValues) => ({ ...prevValues, [name]: value }));
     };
 
     return (
       <>
         <div className="main_content create_wrapper">
           <div className="create_container">
-            <h1 className="create_title">Create an issue</h1>
+            <h1 className="create_title">
+              {modify ? "Modify the issue" : "Create an issue"}
+            </h1>
             <form className="issue_form" onSubmit={handleCreate}>
               <div className="inputs input_title">
                 <h4 className="label label_title">Title</h4>
@@ -128,10 +123,10 @@ const Create = () => {
                   onChange={onChange}
                   defaultValue={modify ? location.status : "to_do"}
                 >
-                  <option value="to_do">TO DO</option>
-                  <option value="in_progress">IN PROGRESS</option>
-                  <option value="ready_for_review">READY FOR REVIEW</option>
-                  <option value="completed">COMPLETED</option>
+                  <option value="TO DO">TO DO</option>
+                  <option value="IN PROGRESS">IN PROGRESS</option>
+                  <option value="READY FOR REVIEW">READY FOR REVIEW</option>
+                  <option value="COMPLETED">COMPLETED</option>
                 </select>
               </div>
               <div className="inputs input_reporter">
@@ -161,7 +156,9 @@ const Create = () => {
                 <Link to="/dashboard">
                   <button className="btn_issue btn_issue_cancel">Cancel</button>
                 </Link>
-                <button className="btn_issue btn_issue_submit">Create</button>
+                <button className="btn_issue btn_issue_submit">
+                  {modify ? "Modify" : "Create"}
+                </button>
               </div>
             </form>
           </div>
