@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./IssueList.css";
 
 const IssueList = (props) => {
-  const { id, severity, title, description, time, status } = props.issue;
+  const { id, severity, title, time, status } = props.issue;
   return (
     <tr>
       <td className="td_id">{id}</td>
