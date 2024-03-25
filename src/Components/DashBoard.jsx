@@ -15,6 +15,8 @@ const DashBoard = () => {
     const [issues, setIssues] = useState(
       JSON.parse(localStorage.getItem("issues")) || null
     );
+
+    const numIssues = issues.length;
     return (
       <>
         <div className="main_content dashboard_container">
@@ -60,9 +62,11 @@ const DashBoard = () => {
               </tr>
             </thead>
             <tbody>
-              {issues.length ? (
+              {numIssues ? (
                 issues.reverse().map((issue) => {
-                  return <IssueList key={issue.id} issue={issue}></IssueList>;
+                  return (
+                    <IssueList key={issue.uniqueId} issue={issue}></IssueList>
+                  );
                 })
               ) : (
                 <tr>
