@@ -37,6 +37,8 @@ const Create = () => {
       JSON.parse(localStorage.getItem("issues"))
     );
 
+    const numIssues = issues.length;
+
     const [isInitialRender, setIsInitialRender] = useState(true);
 
     useEffect(() => {
@@ -65,11 +67,12 @@ const Create = () => {
       const month = date.getMonth() + 1;
       const day = date.getDate();
       const year = date.getFullYear();
-      const id = uuidv4();
+      const uniqueId = uuidv4();
       setValues((prevValue) => {
         const updatedValues = {
           ...prevValue,
-          id: id,
+          uniqueId: uniqueId,
+          id: numIssues ? issues[numIssues - 1].id + 1 : 1,
           time: `${month}/${day}/${year}`
         };
         // put setIssues inside setValues to make sure setIssues after setValues
