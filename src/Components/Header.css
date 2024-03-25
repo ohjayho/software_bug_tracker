@@ -44,5 +44,10 @@ header a {
 }
 
 .username {
-  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.logged_in {
+  display: flex;
 }

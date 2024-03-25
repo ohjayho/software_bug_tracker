@@ -1,8 +1,22 @@
-import { Link } from "react-router-dom";
-import user from "../assets/user.png";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import userImg from "../assets/user.png";
 import "./Header.css";
 
 const Header = () => {
+  const [user, setUser] = useState(localStorage.getItem("currentUser"));
+  const authenticated = JSON.parse(localStorage.getItem("authenticated"));
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate("/");
+  };
+  const handleLogut = () => {
+    localStorage.setItem("authenticated", false);
+    localStorage.setItem("currentUser", "");
+    location.reload();
+  };
+
   return (
     <header>
       <div className="title">
@@ -22,8 +36,22 @@ const Header = () => {
         </div>
         <div className="menus">
           <div className="user_container">
-            <div className="username">User</div>
-            <img src={user} alt="" />
+            <div className="username">
+              {user && authenticated ? (
+                <div className="logged_in">
+                  <div className="logged_greeting">Welcome back,</div>
+                  <div className="logged_user">{user}</div>
+                  <div className="btn_logout" onClick={handleLogut}>
+                    Log out
+                  </div>
+                </div>
+              ) : (
+                <div className="login_require" onClick={handleLogin}>
+                  Login
+                </div>
+              )}
+            </div>
+            <img src={userImg} alt="" />
           </div>
         </div>
       </div>
