@@ -9,6 +9,9 @@ import ErrorPage from "./Components/ErrorPage.jsx";
 import Header from "./Components/Header.jsx";
 import Footer from "./Components/Footer.jsx";
 import SignUpForm from "./Components/SignUpForm.jsx";
+import Login from "./pages/components/Login.jsx";
+import Register from "./pages/components/Register.jsx";
+import Auth from "./pages/Auth.jsx";
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
         <Route path="/dashboard/issue/:id" element={<Issue />} />
         <Route path="/create" element={<Create />} />
         <Route path="*" element={<ErrorPage />} />
+        <Route path="/a" element={<Login />} />
+        <Route path="/b" element={<Register />} />
+        <Route path="/c" element={<Auth />} />
       </Routes>
       <Footer />
     </BrowserRouter>
