@@ -1,16 +1,12 @@
 import { useState } from "react";
 import "./LoginForm.css";
-import { useNavigate, Navigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [authenticated, setAuthenticated] = useState(
-    localStorage.getItem("authenticated") || false
-  );
   const users = JSON.parse(localStorage.getItem("users"));
-  console.log(users, "유저");
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -21,13 +17,12 @@ const LoginForm = () => {
     console.log(account);
     if (account && account.pw === password) {
       localStorage.setItem("authenticated", true);
+      localStorage.setItem("currentUser", username);
       navigate("/dashboard");
+      location.reload();
     }
   };
 
-  if (authenticated === "true") {
-    return <Navigate to="/dashboard" />;
-  }
   return (
     <>
       <form className="login_form" onSubmit={handleLogin}>
