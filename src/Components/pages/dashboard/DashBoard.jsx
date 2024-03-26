@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, Navigate, Routes, Route } from "react-router-dom";
-import IssueList from "./IssueList";
+import IssueList from "./components/IssueList";
 import "./DashBoard.css";
 
 const DashBoard = () => {

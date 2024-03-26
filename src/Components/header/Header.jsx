@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import userImg from "../assets/user.png";
+import userImg from "../../assets/user.png";
 import "./Header.css";
 
 const Header = () => {
