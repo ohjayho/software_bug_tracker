@@ -9,11 +9,12 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    navigate("/");
+    navigate("/login");
   };
   const handleLogut = () => {
     localStorage.setItem("authenticated", false);
     localStorage.setItem("currentUser", "");
+    navigate("/login");
     location.reload();
   };
 
