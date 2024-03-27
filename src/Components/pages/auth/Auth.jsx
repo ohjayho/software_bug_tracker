@@ -1,5 +1,5 @@
 import "./Auth.css";
-import Login from "../Login/Login";
+import Login from "./Login/Login";
 
 const Auth = () => {
   return (
