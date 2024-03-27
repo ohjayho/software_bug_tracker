@@ -1,4 +1,5 @@
 import "./About.css";
+import isAuthenticated from "../../../utils/authentication";
 
 const About = () => {
   if (!isAuthenticated()) {
