@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { Link, Navigate, Routes, Route } from "react-router-dom";
+import { Link, Navigate, Routes, Route, useNavigate } from "react-router-dom";
 import IssueList from "./components/IssueList";
 import "./DashBoard.css";
+import isAuthenticated from "../../../utils/authentication";
 
 const DashBoard = () => {
-  const authenticated = localStorage.getItem("authenticated");
-  if (authenticated !== "true") {
-    return <Navigate to="/" />;
+  const navigate = useNavigate();
+  if (!isAuthenticated()) {
+    console.log("test");
+    return <Navigate to="/"></Navigate>;
   } else {
     if (!localStorage.getItem("issues")) {
       // prevent page crash
