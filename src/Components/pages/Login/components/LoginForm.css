@@ -11,6 +11,8 @@
 
 .login_title {
   color: rgb(53, 50, 50);
+  font-weight: 400;
+  font-size: 25px;
 }
 
 .input_label {
@@ -36,7 +38,7 @@
 .login_field {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 

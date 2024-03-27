@@ -26,7 +26,7 @@ const LoginForm = () => {
   return (
     <>
       <form className="login_form" onSubmit={handleLogin}>
-        <h1 className="login_title">Software Bug Tracker</h1>
+        <h2 className="login_title">Login</h2>
         <div className="login_form_container">
           <div className="input_container">
             <label className="input_label" htmlFor="id">

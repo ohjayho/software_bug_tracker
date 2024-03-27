@@ -32,7 +32,7 @@ const SignUpForm = (props) => {
   };
   return (
     <div className="signupform_container">
-      <h1>Make your account</h1>
+      <h1 className="signup_title">Sign Up</h1>
       <form action="" className="signup_form">
         <div className="signup_inputs input_id">
           <label htmlFor="signup_id">ID</label>

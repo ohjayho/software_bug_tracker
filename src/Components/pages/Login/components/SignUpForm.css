@@ -2,6 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 300px;
+  color: rgb(51, 51, 51);
+}
+
+.signup_title {
+  color: rgb(53, 50, 50);
+  font-weight: 400;
+  font-size: 25px;
 }
 
 .signup_inputs {
@@ -29,7 +37,7 @@
   color: white;
   border: none;
   border-radius: 5px;
-  width: 80px;
+  width: 70px;
   height: 30px;
 }
 
