@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate, Navigate } from "react-router-dom";
 import "./Create.css";
 import { v4 as uuidv4 } from "uuid";
+import isAuthenticated from "../../../utils/authentication";
 
 const Create = () => {
-  const authenticated = localStorage.getItem("authenticated");
-  if (authenticated !== "true") {
-    return <Navigate to="/" />;
+  if (!isAuthenticated()) {
+    return <Navigate to="/login"></Navigate>;
   } else {
     // if modify
     const location = useLocation().state;

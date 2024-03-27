@@ -5,10 +5,8 @@ import "./DashBoard.css";
 import isAuthenticated from "../../../utils/authentication";
 
 const DashBoard = () => {
-  const navigate = useNavigate();
   if (!isAuthenticated()) {
-    console.log("test");
-    return <Navigate to="/"></Navigate>;
+    return <Navigate to="/login"></Navigate>;
   } else {
     if (!localStorage.getItem("issues")) {
       // prevent page crash
