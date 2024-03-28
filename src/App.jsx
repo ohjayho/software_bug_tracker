@@ -7,18 +7,40 @@ import ErrorPage from "./Components/ErrorPage.jsx";
 import Issue from "./Components/pages/issue/Issue.jsx";
 import Auth from "./Components/pages/auth/Auth.jsx";
 import MainLayout from "./Components/MainLayout.jsx";
+import { useState } from "react";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    JSON.parse(localStorage.getItem("authenticated"))
+  );
+  const AuthenticatedRoute = ({ Component }) => {
+    return isAuthenticated ? <Component /> : <Navigate to="/login" />;
+  };
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Auth />} />
         <Route element={<MainLayout />}>
-          <Route path="/about" element={<About />} />
-          <Route path="/dashboard" element={<DashBoard />} />
-          <Route path="/dashboard/issue/:id" element={<Issue />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="*" element={<ErrorPage />} />
+          <Route
+            path="/about"
+            element={<AuthenticatedRoute Component={About} />}
+          />
+          <Route
+            path="/dashboard"
+            element={<AuthenticatedRoute Component={DashBoard} />}
+          />
+          <Route
+            path="/dashboard/issue/:id"
+            element={<AuthenticatedRoute Component={Issue} />}
+          />
+          <Route
+            path="/create"
+            element={<AuthenticatedRoute Component={Create} />}
+          />
+          <Route
+            path="*"
+            element={<AuthenticatedRoute Component={ErrorPage} />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
