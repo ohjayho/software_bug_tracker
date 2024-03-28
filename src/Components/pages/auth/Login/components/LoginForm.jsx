@@ -1,6 +1,9 @@
 import { useState } from "react";
+import "./forms.css";
 import "./LoginForm.css";
 import { useNavigate, Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faUnlock } from "@fortawesome/free-solid-svg-icons";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -27,35 +30,33 @@ const LoginForm = () => {
 
   return (
     <>
-      <form className="login_form" onSubmit={handleLogin}>
-        <h2 className="login_title">Login</h2>
-        <div className="login_form_container">
+      <form className="auth_form login_form" onSubmit={handleLogin}>
+        <h2 className="form_title login_title">Login</h2>
+        <div className="form_container login_form_container">
           <div className="input_container">
-            <label className="input_label" htmlFor="id">
-              ID
-            </label>
+            <FontAwesomeIcon icon={faUser} />
             <input
               type="text"
               className="input_field input_id"
               id="id"
+              placeholder="ID"
               required
               onChange={(e) => setUsername(e.target.value)}
             ></input>
           </div>
           <div className="input_container">
-            <label className="input_label" htmlFor="password">
-              Password
-            </label>
+            <FontAwesomeIcon icon={faUnlock} />
             <input
               type="password"
               className="input_field input_pw"
               id="password"
+              placeholder="Password"
               required
               onChange={(e) => setPassword(e.target.value)}
             ></input>
           </div>
-          <div className="login_field">
-            <button className="login_btn">Login</button>
+          <div className="btn_field login_field">
+            <button className="form_btn login_btn">Login</button>
           </div>
         </div>
       </form>

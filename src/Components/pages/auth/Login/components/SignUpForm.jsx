@@ -1,9 +1,13 @@
+import "./forms.css";
 import "./SignUpForm.css";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faUnlock } from "@fortawesome/free-solid-svg-icons";
 
 const SignUpForm = (props) => {
-  const [id, setId] = useState();
-  const [pw, setPw] = useState();
+  const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
+  const [confirmPw, setConfirmPw] = useState("");
   const [existUser, setExistUser] = useState(
     JSON.parse(localStorage.getItem("users")) || []
   );
@@ -15,58 +19,66 @@ const SignUpForm = (props) => {
 
   const handleSignup = (e) => {
     e.preventDefault();
-    if (!isIdExist(id)) {
-      localStorage.setItem(
-        "users",
-        JSON.stringify([...existUser, { id: id, pw: pw }])
-      );
-      setRegister(false);
+    if (pw !== confirmPw) {
+      alert(`Passwords do not match. Please check your passwords`);
     } else {
-      alert(`User name '${id}' already exists, please try again`);
+      if (!isIdExist(id)) {
+        localStorage.setItem(
+          "users",
+          JSON.stringify([...existUser, { id: id, pw: pw }])
+        );
+        setRegister(false);
+      } else {
+        alert(`User name '${id}' already exists, please try again`);
+      }
     }
   };
 
-  const handleCancel = (e) => {
-    e.preventDefault();
-    setRegister(false);
-  };
   return (
     <>
-      <form className="signup_form" onSubmit={handleSignup}>
-        <h2 className="signup_title">Sign Up</h2>
-        <div className="signup_form_container">
-          <div className="signup_inputs input_id">
-            <label htmlFor="id" className="signup_id signup_input_label">
-              ID
-            </label>
+      <form className="auth_form signup_form" onSubmit={handleSignup}>
+        <h2 className="form_title signup_title">Sign Up</h2>
+        <div className="form_container signup_form_container">
+          <div className="input_container signup_input_container input_id">
+            <FontAwesomeIcon icon={faUser} />
             <input
               type="text"
               name="id"
               id="signup_id"
+              className="input_field signup_input_field"
+              placeholder="ID"
               required
               onChange={(e) => setId(e.target.value)}
             />
           </div>
-          <div className="signup_inputs input_pw">
-            <label htmlFor="signup_pw" className="signup_id signup_input_label">
-              Password
-            </label>
+          <div className="input_container signup_input_container input_pw">
+            <FontAwesomeIcon icon={faUnlock} />
             <input
               type="password"
               name="pw"
               id="signup_pw"
+              className="input_field signup_input_field"
+              placeholder="Password"
               required
               onChange={(e) => setPw(e.target.value)}
             />
           </div>
-          <div className="signup_btns_container">
-            <button
-              className="signup_btn signup_cancel_btn"
-              onClick={handleCancel}
-            >
-              Cancel
+          <div className="input_container signup_input_container input_pw">
+            <FontAwesomeIcon icon={faUnlock} />
+            <input
+              type="password"
+              name="pw"
+              id="signup_pw"
+              className="input_field signup_input_field"
+              placeholder="Confirm Password"
+              required
+              onChange={(e) => setConfirmPw(e.target.value)}
+            />
+          </div>
+          <div className="btn_field signup_btns_container">
+            <button className="form_btn signup_btn signup_create_btn">
+              Sign up!
             </button>
-            <button className="signup_btn signup_create_btn">Sign up!</button>
           </div>
         </div>
       </form>
