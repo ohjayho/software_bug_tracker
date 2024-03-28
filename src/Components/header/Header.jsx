@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import userImg from "../../assets/user.png";
 import "./Header.css";
+import logo from "../../assets/logo.png";
 
 const Header = () => {
   const [user, setUser] = useState(localStorage.getItem("currentUser"));
@@ -20,11 +20,13 @@ const Header = () => {
 
   return (
     <header>
-      <div className="title">
-        <Link to="/dashboard">Software Bug Tracker</Link>
+      <div className="header_logo">
+        <Link to="/dashboard">
+          <img src={logo} alt="" />
+        </Link>
       </div>
       <div className="header_container">
-        <div className="menus">
+        <div className="menu_container">
           <div className="menu">
             <Link to="/about">About</Link>
           </div>
@@ -35,24 +37,20 @@ const Header = () => {
             <Link to="/create">Open Issues</Link>
           </div>
         </div>
-        <div className="menus">
+        <div className="menu_container">
           <div className="user_container">
-            <div className="username">
-              {user && authenticated ? (
-                <div className="logged_in">
-                  <div className="logged_greeting">Welcome back,</div>
-                  <div className="logged_user">{user}</div>
-                  <div className="btn_logout" onClick={handleLogut}>
-                    Log out
-                  </div>
+            {user && authenticated ? (
+              <div className="logged_in">
+                <h4 className="logged_user">{user}</h4>
+                <div className="btn_logout" onClick={handleLogut}>
+                  Logout
                 </div>
-              ) : (
-                <div className="login_require" onClick={handleLogin}>
-                  Login
-                </div>
-              )}
-            </div>
-            <img src={userImg} alt="" />
+              </div>
+            ) : (
+              <div className="login_require" onClick={handleLogin}>
+                Login
+              </div>
+            )}
           </div>
         </div>
       </div>
