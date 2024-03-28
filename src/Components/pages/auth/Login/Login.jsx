@@ -13,8 +13,8 @@ const Login = () => {
         <LoginForm setRegister={setRegister} />
       )}
       {register ? (
-        <div className="signup_container">
-          <h5 className="signup_msg">Already have an account?</h5>
+        <div className="form_msg_container">
+          <h5 className="form_msg login_msg">Already have an account?</h5>
           <h5
             className="signup_msg signup_click"
             onClick={() => {
@@ -25,8 +25,8 @@ const Login = () => {
           </h5>
         </div>
       ) : (
-        <div className="signup_container">
-          <h5 className="signup_msg">Don't have an account?</h5>
+        <div className="form_msg_container">
+          <h5 className="form_msg signup_msg">Don't have an account?</h5>
           <h5
             className="signup_msg signup_click"
             onClick={() => {
