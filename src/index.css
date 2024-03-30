@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 html,
@@ -21,7 +22,6 @@ body {
   align-items: center;
   position: relative;
   flex-grow: 1;
-  font-family: "Poppins", sans-serif;
 }
 
 a {
