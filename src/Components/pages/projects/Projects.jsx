@@ -1,6 +1,7 @@
 import "./Projects.css";
 import "./components/Project";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import Project from "./components/Project";
 import dummyArray from "./components/dummy";
 import Modal from "./components/Modal";
@@ -10,7 +11,8 @@ const Projects = () => {
 
   return (
     <>
-      {modalOpen && <Modal setModalOpen={setModalOpen} />}
+      {modalOpen &&
+        createPortal(<Modal setModalOpen={setModalOpen} />, document.body)}
       <div className="projects_container">
         <div className="header_projects">
           <h1 className="title_projects">Projects</h1>
