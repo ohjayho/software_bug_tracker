@@ -1,63 +1,12 @@
 .dashboard_container {
+  width: 90vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 10px 20px;
 }
 
-.btns_dash {
+.charts_container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-}
-
-.btn_sort {
-  width: 115px;
-  height: 40px;
-  font-size: 16px;
-  color: white;
-  background-color: rgb(52, 152, 219);
-  border: none;
-  border-radius: 2px;
-}
-
-.btn_create {
-  width: 50px;
-  height: 20px;
-  background-color: rgb(46, 160, 67);
-  border: none;
-  border-radius: 2px;
-  color: white;
-}
-
-.entries_dash {
-  display: flex;
-  justify-content: space-around;
-}
-
-.entries_select {
-  margin: 0 10px;
-}
-
-.num_entries {
-  display: flex;
-}
-
-.severity_entries {
-  display: flex;
-}
-
-.table_dashboard {
-  table-layout: fixed;
-}
-
-th {
-  background-color: #eaeaea;
-}
-
-td {
-  text-align: center;
-}
-
-.dashboard_container a {
-  color: black;
 }
