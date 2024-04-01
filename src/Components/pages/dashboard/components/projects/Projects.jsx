@@ -1,16 +1,28 @@
 import "./Projects.css";
 import "./components/Project";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Project from "./components/Project";
-import dummyArray from "./components/dummy";
 import ProjectModal from "./components/ProjectModal";
+import axios from "axios";
 
 const Projects = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [projects, setProjects] = useState(
     JSON.parse(localStorage.getItem("projects"))
   );
+
+  useEffect(() => {
+    const fetchAllProjects = async () => {
+      try {
+        const res = await axios.get("http://localhost:8800/projects");
+        setProjects(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchAllProjects();
+  }, []);
 
   return (
     <>
