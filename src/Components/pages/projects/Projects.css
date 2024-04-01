@@ -1,6 +1,5 @@
 .projects_container {
   width: 100%;
-  padding: 10px 20px;
 }
 
 .header_projects {
@@ -49,7 +48,7 @@ td {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid grey;
+  border: 1px solid #c0c0c0;
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -59,4 +58,5 @@ td {
   margin: 0 5px;
   background-color: #33a70f;
   color: white;
+  border: none;
 }

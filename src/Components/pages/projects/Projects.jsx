@@ -4,16 +4,22 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import Project from "./components/Project";
 import dummyArray from "./components/dummy";
-import Modal from "./components/Modal";
+import ProjectModal from "./components/ProjectModal";
 
 const Projects = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [projects, setProjects] = useState(
+    JSON.parse(localStorage.getItem("projects"))
+  );
 
   return (
     <>
       {modalOpen &&
-        createPortal(<Modal setModalOpen={setModalOpen} />, document.body)}
-      <div className="projects_container">
+        createPortal(
+          <ProjectModal setModalOpen={setModalOpen} />,
+          document.body
+        )}
+      <div className="projects_container border_shadow_component">
         <div className="header_projects">
           <h1 className="title_projects">Projects</h1>
           <button
@@ -32,8 +38,8 @@ const Projects = () => {
             </tr>
           </thead>
           <tbody>
-            {dummyArray.map((element) => {
-              return <Project props={element} />;
+            {projects.map((prj) => {
+              return <Project project={prj} />;
             })}
           </tbody>
         </table>
