@@ -53,6 +53,7 @@
 
 .close_btn_modal {
   font-size: 15px;
+  cursor: pointer;
 }
 
 .section_modal {
