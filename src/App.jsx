@@ -4,7 +4,6 @@ import DashBoard from "./Components/pages/dashboard/DashBoard.jsx";
 import Create from "./Components/pages/create/Create.jsx";
 import About from "./Components/pages/about/About.jsx";
 import ErrorPage from "./Components/ErrorPage.jsx";
-import Issue from "./Components/pages/issue/Issue.jsx";
 import Auth from "./Components/pages/auth/Auth.jsx";
 import MainLayout from "./Components/MainLayout.jsx";
 import { useState } from "react";
@@ -29,10 +28,10 @@ function App() {
             path="/dashboard"
             element={<AuthenticatedRoute Component={DashBoard} />}
           />
-          <Route
+          {/* <Route
             path="/dashboard/issue/:id"
             element={<AuthenticatedRoute Component={Issue} />}
-          />
+          /> */}
           <Route
             path="/create"
             element={<AuthenticatedRoute Component={Create} />}
