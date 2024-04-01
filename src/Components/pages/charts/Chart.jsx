@@ -24,6 +24,9 @@ const options = {
   plugins: {
     legend: {
       position: "right"
+    },
+    datalabels: {
+      color: "#ffffff"
     }
   }
 };
@@ -32,7 +35,7 @@ const option = {};
 
 const Chart = () => {
   return (
-    <div className="chart_container">
+    <div className="chart_container border_shadow_component">
       <div className="header_chart">
         <h1 className="title_chart">Tickets by Type</h1>
       </div>
