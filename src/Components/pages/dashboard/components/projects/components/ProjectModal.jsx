@@ -59,29 +59,6 @@ const ProjectModal = ({ setModalOpen }) => {
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
           </div>
-          {/* <div className="addmembers_section_modal section_modal">
-            <h2 className="subtitle_modal">Add Team Members</h2>
-            <select
-              name=""
-              id=""
-              className="select_modal"
-              multiple
-              onChange={(e) => {
-                const selected = [];
-                Array.prototype.forEach.call(e.target.options, function (opt) {
-                  // Since e.target.option whichi is htmloptionscollection is not iterable, use call function
-                  if (opt.selected) {
-                    selected.push(opt.value);
-                  }
-                });
-                setMembers(selected);
-              }}
-            >
-              <option value="5재">5재</option>
-              <option value="동라프">동라프</option>
-              <option value="앙큼">앙큼</option>
-            </select>
-          </div> */}
           <SelectMembers setMembers={setMembers} />
         </div>
         <div className="footer_modal">
