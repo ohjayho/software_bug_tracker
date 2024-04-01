@@ -5,8 +5,15 @@
   align-items: center;
 }
 
-.shadow_component {
+.border_shadow_component {
+  background-color: #fefefe;
+  padding: 10px 20px;
+  border-radius: 5px;
   -webkit-box-shadow: 0px 4px 24px 1px rgba(0, 0, 0, 0.18);
   -moz-box-shadow: 0px 4px 24px 1px rgba(0, 0, 0, 0.18);
   box-shadow: 0px 4px 24px 1px rgba(0, 0, 0, 0.18);
+}
+
+h1 {
+  font-weight: 300;
 }
