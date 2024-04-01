@@ -8,22 +8,18 @@ import Issue from "./Components/pages/issue/Issue.jsx";
 import Auth from "./Components/pages/auth/Auth.jsx";
 import MainLayout from "./Components/MainLayout.jsx";
 import { useState } from "react";
-import Projects from "./Components/pages/projects/Projects.jsx";
-import Modal from "./Components/pages/projects/components/Modal.jsx";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
     JSON.parse(localStorage.getItem("authenticated"))
   );
   const AuthenticatedRoute = ({ Component }) => {
-    return isAuthenticated ? <Component /> : <Navigate to="/login" />;
+    return isAuthenticated ? <Component /> : <Navigate to="/" />;
   };
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/pr" element={<Projects />} />
-        <Route path="/modal" element={<Modal />}></Route>
-        <Route path="/login" element={<Auth />} />
+        <Route path="/" element={<Auth />} />
         <Route element={<MainLayout />}>
           <Route
             path="/about"
