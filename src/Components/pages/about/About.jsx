@@ -4,7 +4,7 @@ const About = () => {
   return (
     <>
       <div className="main_content">
-        <div className="about_container shadow_component">
+        <div className="about_container border_shadow_component">
           <p>Welcome to our Bug Tracker!</p>
           <p>
             Our Bug Tracker is designed to help you manage and track software
