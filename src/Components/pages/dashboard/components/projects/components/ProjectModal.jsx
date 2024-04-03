@@ -1,11 +1,11 @@
 import "./ProjectModal.css";
 import SelectMembers from "./select-members/SelectMembers";
 import { useState, useEffect } from "react";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 const ProjectModal = ({ setModalOpen }) => {
-  const [projects, setProjects] = useState(
-    JSON.parse(localStorage.getItem("projects")) || []
-  );
+  const [project, setProject] = useState({});
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [members, setMembers] = useState("");
@@ -17,17 +17,27 @@ const ProjectModal = ({ setModalOpen }) => {
       return;
     }
 
-    localStorage.setItem("projects", JSON.stringify(projects));
-  }, [projects]);
-
-  const handleSubmit = () => {
-    const newProject = {
-      project_name: name,
-      project_description: description,
-      project_members: members
+    const createNewProject = async () => {
+      try {
+        await axios.post("http://localhost:8800/projects", project);
+      } catch (err) {
+        console.log(err);
+      }
     };
 
-    setProjects((projects) => [...projects, newProject]);
+    createNewProject();
+    // localStorage.setItem("projects", JSON.stringify(projects));
+  }, [project]);
+
+  const handleSubmit = (e) => {
+    const newProject = {
+      id: uuidv4(),
+      name: name,
+      description: description,
+      members: members
+    };
+
+    setProject(newProject);
   };
 
   return (
