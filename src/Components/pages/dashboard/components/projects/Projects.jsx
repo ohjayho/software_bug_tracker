@@ -3,7 +3,7 @@ import "./components/Project";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Project from "./components/Project";
-import ProjectModal from "./components/ProjectModal";
+import ProjectModal from "./components/ProjectModal/ProjectModal";
 import axios from "axios";
 
 const Projects = () => {
