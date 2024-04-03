@@ -8,9 +8,7 @@ import axios from "axios";
 
 const Projects = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [projects, setProjects] = useState(
-    JSON.parse(localStorage.getItem("projects"))
-  );
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     const fetchAllProjects = async () => {
@@ -19,6 +17,7 @@ const Projects = () => {
         setProjects(res.data);
       } catch (err) {
         console.log(err);
+        setProjects(false);
       }
     };
     fetchAllProjects();
@@ -50,9 +49,15 @@ const Projects = () => {
             </tr>
           </thead>
           <tbody>
-            {projects.map((prj) => {
-              return <Project project={prj} />;
-            })}
+            {projects.length ? (
+              projects.map((prj) => {
+                return <Project project={prj} key={prj.id} />;
+              })
+            ) : (
+              <tr>
+                <td colSpan={3}>No projects</td>
+              </tr>
+            )}
           </tbody>
         </table>
         <div className="pages_projects">

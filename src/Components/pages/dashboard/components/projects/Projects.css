@@ -31,6 +31,10 @@ td {
   text-align: start;
 }
 
+td[colspan]:not([colspan="1"]) {
+  text-align: center;
+}
+
 .contributors_table {
   display: flex;
   justify-content: space-between;
