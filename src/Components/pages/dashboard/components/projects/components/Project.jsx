@@ -1,5 +1,4 @@
 const Project = ({ project }) => {
-  console.log(project);
   return (
     <tr>
       <td>{project.name}</td>
@@ -7,10 +6,13 @@ const Project = ({ project }) => {
       <td>
         <div className="contributors_table">
           <div className="members_contributors">
-            {/* {project.members.map((member) => {
-              return <div className="name_members">{member}</div>;
-            })} */}
-            {project.members}
+            {Object.values(project.members).map((member) => {
+              return (
+                <div className="name_members" key={member}>
+                  {member}
+                </div>
+              );
+            })}
           </div>
           <h3 className="dots_contributors">:</h3>
         </div>
