@@ -11,11 +11,11 @@ const SelectMembers = ({ setMembers }) => {
         className="select_modal"
         multiple
         onChange={(e) => {
-          const selected = [];
+          let selected = "";
           Array.prototype.forEach.call(e.target.options, function (opt) {
             // Since e.target.option whichi is htmloptionscollection is not iterable, use call function
             if (opt.selected) {
-              selected.push(opt.value);
+              selected = opt.value;
             }
           });
           setMembers(selected);
