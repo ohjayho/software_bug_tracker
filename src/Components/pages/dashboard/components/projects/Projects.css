@@ -31,7 +31,7 @@ td {
   text-align: start;
 }
 
-td[colspan]:not([colspan="1"]) {
+td[colspan="3"] {
   text-align: center;
 }
 
