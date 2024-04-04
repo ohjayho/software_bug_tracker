@@ -1,3 +1,4 @@
+import "../../components.css";
 import "./Projects.css";
 import "./components/Project";
 import { useEffect, useState } from "react";
