@@ -1,19 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./forms.css";
 import "./LoginForm.css";
 import { useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faUnlock } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const users = JSON.parse(localStorage.getItem("users"));
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const res = await axios.get("http://localhost:8800/users");
+        setUsers(res.data);
+        console.log("있나", res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUsers();
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (!users) {
+    if (!users.length) {
+      console.log("렝스", users.length);
       alert(`This account doesn't exist. Please check your account.`);
     }
     const account = users.find((user) => user.id === username);
