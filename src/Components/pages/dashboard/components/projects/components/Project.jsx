@@ -1,18 +1,24 @@
+import { Link } from "react-router-dom";
+
 const Project = ({ project }) => {
   return (
     <tr>
-      <td>{project.name}</td>
-      <td>{project.description}</td>
+      <td>
+        <Link to={`/dashboard/project/${project.id}`}>{project.name}</Link>
+      </td>
+      <td>
+        <Link to={`/dashboard/project/${project.id}`}>
+          {project.description}
+        </Link>
+      </td>
       <td>
         <div className="contributors_table">
           <div className="members_contributors">
-            {Object.values(project.members).map((member) => {
-              return (
-                <div className="name_members" key={member}>
-                  {member}
-                </div>
-              );
-            })}
+            <td>
+              <Link to={`/dashboard/project/${project.id}`}>
+                {project.members}
+              </Link>
+            </td>
           </div>
           <h3 className="dots_contributors">:</h3>
         </div>
