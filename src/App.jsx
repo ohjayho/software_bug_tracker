@@ -1,12 +1,12 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import DashBoard from "./Components/pages/dashboard/DashBoard.jsx";
-import Create from "./Components/pages/create/Create.jsx";
 import About from "./Components/pages/about/About.jsx";
 import ErrorPage from "./Components/ErrorPage.jsx";
 import Auth from "./Components/pages/auth/Auth.jsx";
 import MainLayout from "./Components/MainLayout.jsx";
 import { useState } from "react";
+import ProjectPage from "./Components/pages/dashboard/components/projects/components/ProjectPage/ProjectPage.jsx";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -28,13 +28,9 @@ function App() {
             path="/dashboard"
             element={<AuthenticatedRoute Component={DashBoard} />}
           />
-          {/* <Route
-            path="/dashboard/issue/:id"
-            element={<AuthenticatedRoute Component={Issue} />}
-          /> */}
           <Route
-            path="/create"
-            element={<AuthenticatedRoute Component={Create} />}
+            path="/dashboard/project/:id"
+            element={<AuthenticatedRoute Component={ProjectPage} />}
           />
           <Route
             path="*"
