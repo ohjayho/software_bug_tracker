@@ -17,7 +17,6 @@ const LoginForm = () => {
       try {
         const res = await axios.get("http://localhost:8800/users");
         setUsers(res.data);
-        console.log("있나", res.data);
       } catch (err) {
         console.log(err);
       }
@@ -30,6 +29,7 @@ const LoginForm = () => {
     if (!users.length) {
       console.log("렝스", users.length);
       alert(`This account doesn't exist. Please check your account.`);
+      return;
     }
     const account = users.find((user) => user.id === username);
     console.log(account);
