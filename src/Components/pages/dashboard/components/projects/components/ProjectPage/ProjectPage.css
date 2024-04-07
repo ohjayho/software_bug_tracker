@@ -1,0 +1,24 @@
+.project_page_container {
+  width: 90vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+.upper_section_project_page {
+  display: flex;
+  justify-content: space-between;
+}
+
+.project_team_container {
+  width: 38%;
+}
+
+.project_tickets_container {
+  width: 60%;
+}
+
+.lower_section_project_page {
+  margin-top: 30px;
+}
