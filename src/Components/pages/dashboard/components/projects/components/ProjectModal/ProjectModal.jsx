@@ -10,6 +10,9 @@ const ProjectModal = ({ setModalOpen }) => {
   const [description, setDescription] = useState("");
   const [members, setMembers] = useState("");
   const [initialRender, setInitialRender] = useState(true);
+  const [currentUser, setCurrentUser] = useState(
+    localStorage.getItem("currentUser")
+  );
 
   useEffect(() => {
     if (initialRender) {
@@ -34,7 +37,8 @@ const ProjectModal = ({ setModalOpen }) => {
       id: uuidv4(),
       name: name,
       description: description,
-      members: members
+      members: members,
+      author_id: currentUser
     };
 
     setProject(newProject);
