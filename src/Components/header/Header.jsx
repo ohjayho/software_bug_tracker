@@ -1,7 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import { useState } from "react";
 import "./Header.css";
 import logo from "../../assets/logo.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChalkboard, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const [user, setUser] = useState(localStorage.getItem("currentUser"));
@@ -27,15 +29,12 @@ const Header = () => {
       </div>
       <div className="header_container">
         <div className="menu_container">
-          <div className="menu">
-            <Link to="/about">About</Link>
-          </div>
-          <div className="menu">
-            <Link to="/dashboard">Dashboard</Link>
-          </div>
-          <div className="menu">
-            <Link to="/create">Open Issues</Link>
-          </div>
+          <NavLink to="/about" className="menu btn_about">
+            <FontAwesomeIcon icon={faCircleInfo} /> About
+          </NavLink>
+          <NavLink to="/dashboard" className="menu btn_dashboard">
+            <FontAwesomeIcon icon={faChalkboard} /> Dashboard
+          </NavLink>
         </div>
         <div className="menu_container">
           <div className="user_container">
