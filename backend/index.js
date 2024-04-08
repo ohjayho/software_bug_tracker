@@ -52,6 +52,22 @@ app.get("/dashboard/project/:id/project_tickets", (req, res) => {
   });
 });
 
+app.post("/users", (req, res) => {
+  const q = "INSERT INTO users (id, pw) VALUES (?)";
+
+  const { id, pw } = req.body;
+  const values = [id, pw];
+
+  db.query(q, [values], (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.json(err);
+    }
+    return res.json(data);
+  });
+  console.log("successfully created!");
+});
+
 app.post("/projects", (req, res) => {
   const q =
     "INSERT INTO projects (id, name, description , author_id) VALUES (?)";
@@ -68,11 +84,11 @@ app.post("/projects", (req, res) => {
   });
 });
 
-app.post("/users", (req, res) => {
-  const q = "INSERT INTO users (id, pw) VALUES (?)";
+app.post("/project_members", (req, res) => {
+  const q = "INSERT INTO project_members (project_id,member) VALUES (?)";
 
-  const { id, pw } = req.body;
-  const values = [id, pw];
+  const { project_id, member } = req.body;
+  const values = [project_id, member];
 
   db.query(q, [values], (err, data) => {
     if (err) {
@@ -81,7 +97,6 @@ app.post("/users", (req, res) => {
     }
     return res.json(data);
   });
-  console.log("successfully created!");
 });
 
 app.listen(8800, () => {
