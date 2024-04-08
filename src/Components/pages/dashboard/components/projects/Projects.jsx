@@ -31,17 +31,17 @@ const Projects = () => {
           <ProjectModal setModalOpen={setModalOpen} />,
           document.body
         )}
-      <div className="projects_container border_shadow_component">
-        <div className="header_projects">
-          <h1 className="title_projects">Projects</h1>
+      <div className="projects_container components_container border_shadow_component">
+        <div className="header_projects header_components">
+          <h1 className="title_projects title_header">Projects</h1>
           <button
-            className="btn_new_projects"
+            className="btn_new_projects btn_new"
             onClick={() => setModalOpen(true)}
           >
             New Project
           </button>
         </div>
-        <table className="table_projects">
+        <table className="table_projects table_components">
           <thead>
             <tr>
               <th>PROJECT</th>
@@ -61,10 +61,10 @@ const Projects = () => {
             )}
           </tbody>
         </table>
-        <div className="pages_projects">
-          <div className="btns_pages prev_btn_pages">{`<`}</div>
-          <div className="btns_pages num_btn_pages">1</div>
-          <div className="btns_pages next_btn_pages">{`>`}</div>
+        <div className="pages_projects btns_pagination_container">
+          <div className="btns_pagination prev_btn_pages">{`<`}</div>
+          <div className="btns_pagination num_btn_pages">1</div>
+          <div className="btns_pagination next_btn_pages">{`>`}</div>
         </div>
       </div>
     </>
