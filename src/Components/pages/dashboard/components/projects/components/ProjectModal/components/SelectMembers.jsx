@@ -1,7 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-const SelectMembers = ({ setMembers }) => {
-  const [users, setUsers] = useState(JSON.parse(localStorage.getItem("users")));
+const SelectMembers = ({ setSelectedMembers }) => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const res = await axios.get("http://localhost:8800/users");
+        setUsers(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUsers();
+  }, []);
+
   return (
     <div className="addmembers_section_modal section_modal">
       <h2 className="subtitle_modal">Add Team Members</h2>
@@ -11,18 +25,19 @@ const SelectMembers = ({ setMembers }) => {
         className="select_modal"
         multiple
         onChange={(e) => {
-          let selected = "";
+          let selected = [];
           Array.prototype.forEach.call(e.target.options, function (opt) {
             // Since e.target.option whichi is htmloptionscollection is not iterable, use call function
             if (opt.selected) {
-              selected = opt.value;
+              selected.push(opt.value);
             }
           });
-          setMembers(selected);
+          setSelectedMembers(selected);
         }}
+        required
       >
         {users.map((user) => {
-          console.log("users", user.id);
+          // console.log("users", user.id);
           return <option value={user.id}>{user.id}</option>;
         })}
       </select>
