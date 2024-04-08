@@ -8,11 +8,14 @@ const ProjectModal = ({ setModalOpen }) => {
   const [project, setProject] = useState({});
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [members, setMembers] = useState("");
+  const [members, setMembers] = useState([]);
+  const [selectedMembers, setSelectedMembers] = useState([]);
   const [initialRender, setInitialRender] = useState(true);
+  const [initialRenderTwo, setInitialRenderTwo] = useState(true);
   const [currentUser, setCurrentUser] = useState(
     localStorage.getItem("currentUser")
   );
+  const id = uuidv4();
 
   useEffect(() => {
     if (initialRender) {
@@ -32,16 +35,38 @@ const ProjectModal = ({ setModalOpen }) => {
     // localStorage.setItem("projects", JSON.stringify(projects));
   }, [project]);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (initialRenderTwo) {
+      setInitialRenderTwo(false);
+      return;
+    }
+    const addMembersToProject = async (member) => {
+      try {
+        await axios.post("http://localhost:8800/project_members", member);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    members.map((member) => {
+      addMembersToProject(member);
+    });
+  }, [members]);
+
+  const handleSubmit = () => {
     const newProject = {
-      id: uuidv4(),
+      id: id,
       name: name,
       description: description,
-      members: members,
       author_id: currentUser
     };
-
     setProject(newProject);
+    const newMembers = selectedMembers.map((member) => {
+      return {
+        project_id: id,
+        member: member
+      };
+    });
+    setMembers(newMembers);
   };
 
   return (
@@ -60,6 +85,7 @@ const ProjectModal = ({ setModalOpen }) => {
               type="text"
               className="input_name"
               onChange={(e) => setName(e.target.value)}
+              required
             />
           </div>
           <div className="description_section_modal section_modal">
@@ -71,9 +97,10 @@ const ProjectModal = ({ setModalOpen }) => {
               rows="10"
               className="textarea_modal"
               onChange={(e) => setDescription(e.target.value)}
+              required
             ></textarea>
           </div>
-          <SelectMembers setMembers={setMembers} />
+          <SelectMembers setSelectedMembers={setSelectedMembers} id={id} />
         </div>
         <div className="footer_modal">
           <button className="submit_btn_modal">Submit</button>
