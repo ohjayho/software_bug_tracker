@@ -14,11 +14,9 @@ const Project = ({ project }) => {
       <td>
         <div className="contributors_table last_column_table">
           <div className="members_contributors">
-            <td>
-              <Link to={`/dashboard/project/${project.id}`}>
-                {project.members}
-              </Link>
-            </td>
+            <Link to={`/dashboard/project/${project.id}`}>
+              {project.members}
+            </Link>
           </div>
           <h3 className="menu_dots">:</h3>
         </div>
