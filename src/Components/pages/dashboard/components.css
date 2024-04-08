@@ -7,6 +7,12 @@
   box-shadow: 0px 4px 24px 1px rgba(0, 0, 0, 0.18);
 }
 
+.title_container {
+  margin: 0;
+  margin-bottom: 40px;
+  font-size: 25px;
+}
+
 .components_container {
   width: 100%;
 }
@@ -19,6 +25,8 @@
 }
 
 .title_header {
+  font-size: 18px;
+  font-weight: 500;
   margin: 0;
 }
 
@@ -33,6 +41,20 @@
 
 .table_components {
   width: 100%;
+  border-collapse: collapse;
+}
+
+.table_components th {
+  background-color: rgba(238, 238, 238, 0.753);
+  color: rgb(83, 83, 83);
+  font-size: 13px;
+  padding: 10px 0;
+  font-family: "Ramabhadra", sans-serif;
+  font-weight: 200;
+}
+
+.table_components td:first-child {
+  font-weight: 500;
 }
 
 .table_components th,
