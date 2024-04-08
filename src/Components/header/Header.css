@@ -5,11 +5,12 @@ header {
   background-color: white;
   height: 100%;
   width: 10vw;
+  min-width: 120px;
   padding: 20px 0px;
 }
 
 header a {
-  color: black;
+  color: #808080;
 }
 
 .active {
