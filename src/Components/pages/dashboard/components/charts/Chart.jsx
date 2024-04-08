@@ -33,11 +33,11 @@ const options = {
 
 const option = {};
 
-const Chart = () => {
+const Chart = ({ title }) => {
   return (
     <div className="chart_container border_shadow_component">
       <div className="header_chart">
-        <h1 className="title_chart">Tickets by Type</h1>
+        <h1 className="title_chart">{`Tickets by ${title}`}</h1>
       </div>
       <Pie data={data} options={options} />
     </div>
