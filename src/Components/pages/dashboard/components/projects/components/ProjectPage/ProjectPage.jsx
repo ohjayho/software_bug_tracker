@@ -27,6 +27,7 @@ const ProjectPage = () => {
 
   return (
     <div className="project_page_container">
+      <h1 className="header_project_page title_container">PROJECT</h1>
       <div className="upper_section_project_page">
         {projectInfo.length && <ProjectTeam team={projectInfo[0]} />}
         {projectInfo.length && (
