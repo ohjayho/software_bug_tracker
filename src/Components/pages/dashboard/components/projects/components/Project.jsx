@@ -12,7 +12,7 @@ const Project = ({ project }) => {
         </Link>
       </td>
       <td>
-        <div className="contributors_table">
+        <div className="contributors_table last_column_table">
           <div className="members_contributors">
             <td>
               <Link to={`/dashboard/project/${project.id}`}>
@@ -20,7 +20,7 @@ const Project = ({ project }) => {
               </Link>
             </td>
           </div>
-          <h3 className="dots_contributors">:</h3>
+          <h3 className="menu_dots">:</h3>
         </div>
       </td>
     </tr>
