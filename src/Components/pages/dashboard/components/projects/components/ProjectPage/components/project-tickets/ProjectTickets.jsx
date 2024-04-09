@@ -40,6 +40,7 @@ const ProjectTickets = ({ tickets, setSelectedTicket }) => {
                 onClick={() => {
                   setSelectedTicket((selectedTicket) => !selectedTicket);
                 }}
+                className="ticket_table"
               >
                 <td>{ticket.title}</td>
                 <td>{ticket.description}</td>
