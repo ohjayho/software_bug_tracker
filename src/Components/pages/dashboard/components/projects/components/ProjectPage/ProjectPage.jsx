@@ -14,9 +14,7 @@ const ProjectPage = () => {
   useEffect(() => {
     const fetchProjectInfo = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:8800/dashboard/project/${id}`
-        );
+        const res = await axios.get(`http://localhost:8800/project/${id}`);
         setProjectInfo(res.data);
       } catch (err) {
         console.log(err);
