@@ -1,0 +1,12 @@
+.project_table:hover {
+  background-color: #33a70f;
+  color: white;
+}
+
+.project_table:hover a {
+  color: white;
+}
+
+.project_table {
+  cursor: pointer;
+}
