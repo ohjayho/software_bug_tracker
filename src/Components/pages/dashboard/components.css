@@ -74,6 +74,7 @@ td {
 
 td[colspan]:not([colspan="1"]) {
   text-align: center;
+  padding: 20px 0;
 }
 
 .table_components a {
