@@ -1,3 +1,24 @@
+.selected_ticket_container {
+  padding: 0 20px;
+  padding-bottom: 10px;
+}
+
+.header_selected_ticket {
+  border-bottom: 1px rgb(233, 233, 233) solid;
+  font-size: 18px;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+
+.no_ticket_selected_ticket {
+  padding: 10px 0;
+}
+
+.table_info,
+.assigned_devs_container {
+  padding: 10px 10px;
+}
+
 .header_table_selected_ticket {
   font-size: 11px;
 }
@@ -41,11 +62,13 @@ th {
 
 .comments_section_selected_ticket {
   width: 49%;
+  padding: 0 10px;
 }
 
 .comment {
   display: flex;
   flex-direction: column;
+  padding: 10px 10px;
 }
 
 .header_comment {
