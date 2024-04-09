@@ -1,6 +1,6 @@
 import "../../../../../../components.css";
 
-const ProjectTeam = () => {
+const ProjectTeam = ({ team }) => {
   return (
     <div className="project_team_container border_shadow_component components_container">
       <div className="header_project_team header_components">
@@ -16,16 +16,20 @@ const ProjectTeam = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>name</td>
-            <td>email</td>
-            <td>
-              <div className="last_column_table">
-                <div className="members_contributors">phone</div>
-                <h3 className="menu_dots">:</h3>
-              </div>
-            </td>
-          </tr>
+          {team.map((mb) => {
+            return (
+              <tr key={mb.member}>
+                <td>{mb.member}</td>
+                <td>{mb.email}</td>
+                <td>
+                  <div className="last_column_table">
+                    <div className="members_contributors">{mb.phone}</div>
+                    <h3 className="menu_dots">:</h3>
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <div className="btns_pagination_container">
