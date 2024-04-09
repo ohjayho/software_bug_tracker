@@ -1,5 +1,4 @@
 import "../modal.css";
-// import "./ProjectModal.css";
 import SelectMembers from "./components/SelectMembers";
 import { useState, useEffect } from "react";
 import axios from "axios";
