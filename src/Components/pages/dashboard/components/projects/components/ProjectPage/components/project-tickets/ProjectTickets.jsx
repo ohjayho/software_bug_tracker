@@ -1,4 +1,5 @@
 import "../../../../../../components.css";
+import "../../../modal.css";
 import "./ProjectTickets.css";
 
 import { useState, useEffect } from "react";

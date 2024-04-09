@@ -1,4 +1,5 @@
 import "../../../../../../components.css";
+import "../../../modal.css";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import TeamModal from "./components/TeamModal";
