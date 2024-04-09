@@ -1,0 +1,23 @@
+.middle_section_modal {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom_section_modal {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputs_middle {
+  width: 46%;
+}
+
+.inputs_bottom {
+  width: 29%;
+}
+
+.ticket_inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
