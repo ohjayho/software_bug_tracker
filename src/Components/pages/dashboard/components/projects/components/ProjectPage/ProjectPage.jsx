@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import "./ProjectPage.css";
-import ProjectTeam from "./components/project-team/ProjectTeam";
-import ProjectTickets from "./components/project-tickets/ProjectTickets";
-import SelectedTicket from "./components/project-tickets/components/SelectedTicket";
+import ProjectTeam from "./components/ProjectTeam/ProjectTeam";
+import ProjectTickets from "./components/ProjectTickets/ProjectTickets";
+import SelectedTicket from "./components/ProjectTickets/components/SelectedTicket";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
