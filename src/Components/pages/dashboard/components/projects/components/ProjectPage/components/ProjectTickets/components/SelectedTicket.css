@@ -79,6 +79,11 @@ th {
 
 .header_author_section {
   display: flex;
+  font-size: 11px;
+}
+
+.title_comments_section {
+  font-size: 18px;
 }
 
 .author_comment {
