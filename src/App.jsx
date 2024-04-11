@@ -13,13 +13,17 @@ function App() {
     JSON.parse(localStorage.getItem("authenticated"))
   );
   const AuthenticatedRoute = ({ Component }) => {
-    return isAuthenticated ? <Component /> : <Navigate to="/" />;
+    return isAuthenticated ? <Component /> : <Navigate to="/auth" />;
   };
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Auth />} />
+        <Route path="/auth" element={<Auth />} />
         <Route element={<MainLayout />}>
+          <Route
+            path="/"
+            element={<AuthenticatedRoute Component={DashBoard} />}
+          />
           <Route
             path="/about"
             element={<AuthenticatedRoute Component={About} />}
