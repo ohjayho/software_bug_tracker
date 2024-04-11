@@ -88,6 +88,7 @@ td[colspan]:not([colspan="1"]) {
 }
 
 .menu_dots {
+  position: relative;
   margin-right: 40px;
 }
 
