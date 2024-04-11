@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Project.css";
+import DropDownMenu from "./DropDownMenu/DropDownMenu";
 
 const Project = ({ project }) => {
   const [contributors, setContributors] = useState([]);
+  const [dropDownMenuOpen, setDropDownMenuOpen] = useState(false);
 
   useEffect(() => {
     const getContributors = async () => {
@@ -13,7 +15,6 @@ const Project = ({ project }) => {
           `http://localhost:8800/project_members/${project.id}`
         );
         setContributors(res.data);
-        console.log("컨트리", res.data);
       } catch (err) {
         console.log(err);
       }
@@ -21,10 +22,31 @@ const Project = ({ project }) => {
     getContributors();
   }, []);
 
+  let menuRef = useRef();
+
+  useEffect(() => {
+    let dropDownHandler = (e) => {
+      if (!menuRef.current.contains(e.target)) {
+        setDropDownMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", dropDownHandler);
+
+    return () => {
+      document.removeEventListener("mousedown", dropDownHandler);
+    };
+  });
+
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate(`/dashboard/project/${project.id}`);
+  };
+
+  const handleMenu = (e) => {
+    e.stopPropagation();
+    setDropDownMenuOpen(true);
   };
 
   return (
@@ -38,7 +60,13 @@ const Project = ({ project }) => {
               return <div key={contributor.member}>{contributor.member}</div>;
             })}
           </div>
-          <h3 className="menu_dots">:</h3>
+          <div
+            className="menu_dots"
+            ref={menuRef}
+            onClick={(e) => handleMenu(e)}
+          >
+            :{dropDownMenuOpen && <DropDownMenu />}
+          </div>
         </div>
       </td>
     </tr>
