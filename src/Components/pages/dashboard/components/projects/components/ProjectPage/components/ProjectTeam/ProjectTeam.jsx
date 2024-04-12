@@ -25,7 +25,11 @@ const ProjectTeam = ({ id }) => {
     <>
       {teamModalOpen &&
         createPortal(
-          <TeamModal setTeamModalOpen={setTeamModalOpen} />,
+          <TeamModal
+            notSelectedTeam={team[1]}
+            setTeamModalOpen={setTeamModalOpen}
+            id={id}
+          />,
           document.body
         )}
       <div className="project_team_container border_shadow_component components_container">
