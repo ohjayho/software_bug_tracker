@@ -39,7 +39,6 @@ const TeamModal = ({ notSelectedTeam, setTeamModalOpen, id }) => {
 
   const teamSubmitHandle = () => {
     setNewMembers(addMembers);
-    console.log("애드멤버", addMembers);
   };
 
   return (
