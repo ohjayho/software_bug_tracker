@@ -43,17 +43,19 @@ app.get("/project_members/:id", (req, res) => {
   });
 });
 
-app.get("/project/:id", (req, res) => {
+app.get("/project_team/:id", (req, res) => {
   const members = `SELECT * FROM users u JOIN project_members pm ON u.id = pm.member WHERE pm.project_id = '${req.params.id}';`;
-  const tickets = `SELECT id, title, description, author FROM project_tickets WHERE project_id='${req.params.id}'`;
-  db.query(members + tickets, (err, data) => {
+  const notSelectedMembers = `SELECT u.id FROM users u WHERE NOT EXISTS (SELECT pm.member FROM project_members pm WHERE u.id = pm.member AND pm.project_id = '${req.params.id}')`;
+
+  db.query(members + notSelectedMembers, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
   });
 });
 
-app.get("/dashboard/project/:id/project_tickets", (req, res) => {
-  const tickets = `SELECT * FROM tickets_info WHERE project_id='${req.params.id}'`;
+app.get("/project_tickets/:id", (req, res) => {
+  const tickets = `SELECT id, title, description, author FROM project_tickets WHERE project_id='${req.params.id}';`;
+
   db.query(tickets, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
