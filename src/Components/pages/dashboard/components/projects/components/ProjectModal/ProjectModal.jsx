@@ -15,58 +15,66 @@ const ProjectModal = ({ setModalOpen }) => {
   const [currentUser, setCurrentUser] = useState(
     localStorage.getItem("currentUser")
   );
-  const id = uuidv4();
 
-  useEffect(() => {
-    if (initialRender) {
-      setInitialRender(false);
-      return;
-    }
+  const [uuid, setUuid] = useState(uuidv4());
 
-    const createNewProject = async () => {
-      try {
-        await axios.post("http://localhost:8800/projects", project);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  // useEffect(() => {
+  //   if (initialRender) {
+  //     setInitialRender(false);
+  //     return;
+  //   }
 
-    createNewProject();
-    // localStorage.setItem("projects", JSON.stringify(projects));
-  }, [project]);
+  //   const createNewProject = async () => {
+  //     try {
+  //       await axios.post("http://localhost:8800/projects", project);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
 
-  useEffect(() => {
-    if (initialRenderTwo) {
-      setInitialRenderTwo(false);
-      return;
-    }
-    const addMembersToProject = async (member) => {
-      try {
-        await axios.post("http://localhost:8800/project_members", member);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    members.map((member) => {
-      addMembersToProject(member);
-    });
-  }, [members]);
+  //   createNewProject();
+  //   // localStorage.setItem("projects", JSON.stringify(projects));
+  // }, [project]);
 
-  const handleSubmit = () => {
+  // useEffect(() => {
+  //   if (initialRenderTwo) {
+  //     setInitialRenderTwo(false);
+  //     return;
+  //   }
+
+  //   const addMembersToProject = async () => {
+  //     try {
+  //       await axios.post("http://localhost:8800/project_members", members);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   addMembersToProject();
+  // }, [members]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const newProject = {
-      id: id,
+      id: uuid,
       name: name,
       description: description,
       author_id: currentUser
     };
-    setProject(newProject);
-    const newMembers = selectedMembers.map((member) => {
-      return {
-        project_id: id,
-        member: member
-      };
-    });
-    setMembers(newMembers);
+    // setProject(newProject);
+    // setMembers(selectedMembers);
+    try {
+      await axios.post("http://localhost:8800/projects", newProject);
+
+      await axios.post(
+        "http://localhost:8800/project_members",
+        selectedMembers
+      );
+      setModalOpen(false);
+    } catch (err) {
+      console.log(err);
+    }
+
+    location.reload();
   };
 
   return (
@@ -100,7 +108,7 @@ const ProjectModal = ({ setModalOpen }) => {
               required
             ></textarea>
           </div>
-          <SelectMembers setSelectedMembers={setSelectedMembers} id={id} />
+          <SelectMembers setSelectedMembers={setSelectedMembers} uuid={uuid} />
         </div>
         <div className="footer_modal">
           <button className="submit_btn_modal">Submit</button>
