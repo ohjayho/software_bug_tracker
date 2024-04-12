@@ -3,37 +3,18 @@ import "./ProjectPage.css";
 import ProjectTeam from "./components/ProjectTeam/ProjectTeam";
 import ProjectTickets from "./components/ProjectTickets/ProjectTickets";
 import SelectedTicket from "./components/ProjectTickets/components/SelectedTicket";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 
 const ProjectPage = () => {
   const { id } = useParams();
-  const [projectInfo, setProjectInfo] = useState({});
   const [selectedTicket, setSelectedTicket] = useState(false);
-
-  useEffect(() => {
-    const fetchProjectInfo = async () => {
-      try {
-        const res = await axios.get(`http://localhost:8800/project/${id}`);
-        setProjectInfo(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchProjectInfo();
-  }, []);
 
   return (
     <div className="project_page_container">
       <h1 className="header_project_page title_container">PROJECT</h1>
       <div className="upper_section_project_page">
-        {projectInfo.length && <ProjectTeam team={projectInfo[0]} />}
-        {projectInfo.length && (
-          <ProjectTickets
-            tickets={projectInfo[1]}
-            setSelectedTicket={setSelectedTicket}
-          />
-        )}
+        <ProjectTeam id={id} />
+        <ProjectTickets id={id} setSelectedTicket={setSelectedTicket} />
       </div>
       <div className="lower_section_project_page">
         <SelectedTicket selectedTicket={selectedTicket} />

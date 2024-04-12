@@ -1,11 +1,26 @@
 import "../../../../../../components.css";
 import "../../../modal.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import TeamModal from "./components/TeamModal";
+import axios from "axios";
 
-const ProjectTeam = ({ team }) => {
+const ProjectTeam = ({ id }) => {
+  const [team, setTeam] = useState([]);
   const [teamModalOpen, setTeamModalOpen] = useState(false);
+
+  useEffect(() => {
+    const getTeam = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8800/project_team/${id}`);
+        setTeam(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getTeam();
+  }, []);
+
   return (
     <>
       {teamModalOpen &&
@@ -34,20 +49,21 @@ const ProjectTeam = ({ team }) => {
             </tr>
           </thead>
           <tbody>
-            {team.map((mb) => {
-              return (
-                <tr key={mb.member}>
-                  <td>{mb.member}</td>
-                  <td>{mb.email}</td>
-                  <td>
-                    <div className="last_column_table">
-                      <div className="members_contributors">{mb.phone}</div>
-                      <h3 className="menu_dots">:</h3>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
+            {team.length > 0 &&
+              team[0].map((mb) => {
+                return (
+                  <tr key={mb.member}>
+                    <td>{mb.member}</td>
+                    <td>{mb.email}</td>
+                    <td>
+                      <div className="last_column_table">
+                        <div className="members_contributors">{mb.phone}</div>
+                        <h3 className="menu_dots">:</h3>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
         <div className="btns_pagination_container">

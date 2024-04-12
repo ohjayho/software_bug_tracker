@@ -7,22 +7,23 @@ import { createPortal } from "react-dom";
 import axios from "axios";
 import TicketModal from "./components/TicketModal/TicketModal";
 
-const ProjectTickets = ({ tickets, setSelectedTicket }) => {
+const ProjectTickets = ({ setSelectedTicket, id }) => {
   const [storedTickets, setStoredTickets] = useState([]);
   const [ticketModalOpen, setTicketModalOpen] = useState(false);
 
   useEffect(() => {
     const getTickets = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/project_tickets");
+        const res = await axios.get(
+          `http://localhost:8800/project_tickets/${id}`
+        );
         setStoredTickets(res.data);
       } catch (err) {
         console.log(err);
       }
     };
     getTickets();
-  }, [tickets]);
-  console.log("티켓", tickets);
+  }, []);
 
   return (
     <>
@@ -50,14 +51,15 @@ const ProjectTickets = ({ tickets, setSelectedTicket }) => {
             </tr>
           </thead>
           <tbody>
-            {tickets.length ? (
-              tickets.map((ticket) => {
+            {storedTickets.length > 0 ? (
+              storedTickets.map((ticket) => {
                 return (
                   <tr
                     onClick={() => {
                       setSelectedTicket((selectedTicket) => !selectedTicket);
                     }}
                     className="ticket_table"
+                    key={ticket.title}
                   >
                     <td>{ticket.title}</td>
                     <td>{ticket.description}</td>
