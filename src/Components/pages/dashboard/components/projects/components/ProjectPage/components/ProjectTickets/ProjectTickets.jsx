@@ -6,8 +6,14 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import axios from "axios";
 import TicketModal from "./components/TicketModal/TicketModal";
+import Ticket from "./components/Ticket/Ticket";
 
-const ProjectTickets = ({ setSelectedTicket, project_id, team }) => {
+const ProjectTickets = ({
+  setSelectedTicket,
+  setSelectedTicketOpen,
+  project_id,
+  team
+}) => {
   const [storedTickets, setStoredTickets] = useState([]);
   const [ticketModalOpen, setTicketModalOpen] = useState(false);
 
@@ -58,24 +64,12 @@ const ProjectTickets = ({ setSelectedTicket, project_id, team }) => {
             {storedTickets.length > 0 ? (
               storedTickets.map((ticket) => {
                 return (
-                  <tr
-                    onClick={() => {
-                      setSelectedTicket((selectedTicket) => !selectedTicket);
-                    }}
-                    className="ticket_table"
-                    key={ticket.title}
-                  >
-                    <td>{ticket.title}</td>
-                    <td>{ticket.description}</td>
-                    <td>
-                      <div className="last_column_table">
-                        <div className="members_contributors">
-                          {ticket.author}
-                        </div>
-                        <h3 className="menu_dots">:</h3>
-                      </div>
-                    </td>
-                  </tr>
+                  <Ticket
+                    ticket={ticket}
+                    setSelectedTicket={setSelectedTicket}
+                    setSelectedTicketOpen={setSelectedTicketOpen}
+                    key={ticket.ticket_id}
+                  />
                 );
               })
             ) : (
