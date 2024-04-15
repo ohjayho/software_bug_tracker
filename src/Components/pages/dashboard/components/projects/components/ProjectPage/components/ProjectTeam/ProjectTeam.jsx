@@ -6,8 +6,8 @@ import TeamModal from "./components/TeamModal/TeamModal";
 import TeamMember from "./components/TeamMember/TeamMember";
 import axios from "axios";
 
-const ProjectTeam = ({ id }) => {
-  const [team, setTeam] = useState([]);
+const ProjectTeam = ({ id, team, setTeam }) => {
+  // const [team, setTeam] = useState([]);
   const [teamModalOpen, setTeamModalOpen] = useState(false);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const ProjectTeam = ({ id }) => {
           <tbody>
             {team.length > 0 &&
               team[0].map((mb) => {
-                return <TeamMember mb={mb} />;
+                return <TeamMember key={mb.member} mb={mb} id={id} />;
               })}
           </tbody>
         </table>
