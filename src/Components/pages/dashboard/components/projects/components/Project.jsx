@@ -65,7 +65,10 @@ const Project = ({ project }) => {
             ref={menuRef}
             onClick={(e) => handleMenu(e)}
           >
-            :{dropDownMenuOpen && <DropDownMenu project_id={project.id} />}
+            :
+            {dropDownMenuOpen && (
+              <DropDownMenu project_id={project.project_id} />
+            )}
           </div>
         </div>
       </td>

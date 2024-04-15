@@ -125,8 +125,8 @@ app.post("/project_tickets", (req, res) => {
 
 /*end of post */
 
-app.delete("/projects/:id", (req, res) => {
-  const q = `DELETE FROM projects WHERE id = '${req.params.id}'`;
+app.delete("/projects/:project_id", (req, res) => {
+  const q = `DELETE FROM projects WHERE project_id = '${req.params.project_id}'`;
 
   db.query(q, (err, data) => {
     if (err) {
