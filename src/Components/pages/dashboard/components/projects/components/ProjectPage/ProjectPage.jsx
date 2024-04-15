@@ -2,12 +2,13 @@ import { useParams } from "react-router-dom";
 import "./ProjectPage.css";
 import ProjectTeam from "./components/ProjectTeam/ProjectTeam";
 import ProjectTickets from "./components/ProjectTickets/ProjectTickets";
-import SelectedTicket from "./components/ProjectTickets/components/SelectedTicket";
+import SelectedTicket from "./components/ProjectTickets/components/SelectedTicket/SelectedTicket";
 import { useState } from "react";
 
 const ProjectPage = () => {
   const { project_id } = useParams();
-  const [selectedTicket, setSelectedTicket] = useState(false);
+  const [selectedTicketOpen, setSelectedTicketOpen] = useState(false);
+  const [selectedTicket, setSelectedTicket] = useState("");
   // to pass team data to both ProjectTeam and ProjectTickets, declare useState here.
   // Actual assigning is happening in ProjectTeam in the useEffect
   const [team, setTeam] = useState([]);
@@ -20,11 +21,15 @@ const ProjectPage = () => {
         <ProjectTickets
           project_id={project_id}
           setSelectedTicket={setSelectedTicket}
+          setSelectedTicketOpen={setSelectedTicketOpen}
           team={team[0]}
         />
       </div>
       <div className="lower_section_project_page">
-        <SelectedTicket selectedTicket={selectedTicket} />
+        <SelectedTicket
+          selectedTicket={selectedTicket}
+          selectedTicketOpen={selectedTicketOpen}
+        />
       </div>
     </div>
   );
