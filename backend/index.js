@@ -54,8 +54,7 @@ app.get("/project_team/:project_id", (req, res) => {
 });
 
 app.get("/project_tickets/:project_id", (req, res) => {
-  const tickets = `SELECT ticket_id, title, description, author FROM project_tickets WHERE project_id='${req.params.project_id}';`;
-
+  const tickets = `SELECT * FROM project_tickets WHERE project_id='${req.params.project_id}';`;
   db.query(tickets, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
