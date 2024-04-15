@@ -7,7 +7,7 @@ import { createPortal } from "react-dom";
 import axios from "axios";
 import TicketModal from "./components/TicketModal/TicketModal";
 
-const ProjectTickets = ({ setSelectedTicket, id }) => {
+const ProjectTickets = ({ setSelectedTicket, id, team }) => {
   const [storedTickets, setStoredTickets] = useState([]);
   const [ticketModalOpen, setTicketModalOpen] = useState(false);
 
@@ -29,7 +29,7 @@ const ProjectTickets = ({ setSelectedTicket, id }) => {
     <>
       {ticketModalOpen &&
         createPortal(
-          <TicketModal setTicketModalOpen={setTicketModalOpen} />,
+          <TicketModal setTicketModalOpen={setTicketModalOpen} team={team} />,
           document.body
         )}
       <div className="project_tickets_container border_shadow_component components_container">
