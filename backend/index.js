@@ -110,6 +110,19 @@ app.post("/project_members", (req, res) => {
   });
 });
 
+app.post("/project_tickets", (req, res) => {
+  const q = `INSERT INTO project_tickets (project_id, id, title, description, author) VALUES (?)`;
+  const { project_id, id, title, description, author } = req.body;
+
+  db.query(q, values, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.json(err);
+    }
+    return res.json(data);
+  });
+});
+
 /*end of post */
 
 app.delete("/projects/:id", (req, res) => {
@@ -122,6 +135,19 @@ app.delete("/projects/:id", (req, res) => {
     }
     return res.json(data);
   });
+});
+
+app.delete("/project_members", (req, res) => {
+  const { project_id, member } = req.body;
+  const q = `DELETE FROM project_members WHERE project_id = '${project_id}' AND member = '${member}'`;
+  db.query(q, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.json(err);
+    }
+    return res.json(data);
+  });
+  console.log("Successfully deleted!");
 });
 
 app.listen(8800, () => {
