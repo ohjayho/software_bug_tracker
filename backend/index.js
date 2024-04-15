@@ -53,8 +53,8 @@ app.get("/project_team/:project_id", (req, res) => {
   });
 });
 
-app.get("/project_tickets/:id", (req, res) => {
-  const tickets = `SELECT id, title, description, author FROM project_tickets WHERE project_id='${req.params.id}';`;
+app.get("/project_tickets/:project_id", (req, res) => {
+  const tickets = `SELECT ticket_id, title, description, author FROM project_tickets WHERE project_id='${req.params.project_id}';`;
 
   db.query(tickets, (err, data) => {
     if (err) return res.json(err);
@@ -99,9 +99,9 @@ app.post("/projects", (req, res) => {
 });
 
 app.post("/project_members", (req, res) => {
-  const q = "INSERT INTO project_members (project_id, member) VALUES ?";
+  const q = "INSERT INTO project_members (project_id, member) VALUES (?)";
   const values = req.body;
-  db.query(q, [values], (err, data) => {
+  db.query(q, values, (err, data) => {
     if (err) {
       console.log(err);
       return res.json(err);
@@ -111,17 +111,44 @@ app.post("/project_members", (req, res) => {
 });
 
 app.post("/project_tickets", (req, res) => {
-  const q = `INSERT INTO project_tickets (project_id, id, title, description, author) VALUES (?)`;
-  const { project_id, id, title, description, author } = req.body;
+  const q = `INSERT INTO project_tickets (ticket_id, project_id, title, description, author, time_estimate, type, priority, status) VALUES (?)`;
+  const {
+    ticket_id,
+    project_id,
+    title,
+    description,
+    author,
+    time_estimate,
+    type,
+    priority,
+    status
+  } = req.body;
 
-  db.query(q, values, (err, data) => {
+  const values = [
+    ticket_id,
+    project_id,
+    title,
+    description,
+    author,
+    time_estimate,
+    type,
+    priority,
+    status
+  ];
+
+  db.query(q, [values], (err, data) => {
     if (err) {
       console.log(err);
       return res.json(err);
     }
     return res.json(data);
   });
+  console.log("ticket added successfully!");
 });
+
+// app.post('/ticket_members', (req,res)=>{
+//   const q =
+// })
 
 /*end of post */
 
