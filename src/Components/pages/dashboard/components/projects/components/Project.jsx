@@ -12,7 +12,7 @@ const Project = ({ project }) => {
     const getContributors = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8800/project_members/${project.id}`
+          `http://localhost:8800/project_members/${project.project_id}`
         );
         setContributors(res.data);
       } catch (err) {
@@ -41,7 +41,7 @@ const Project = ({ project }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/dashboard/project/${project.id}`);
+    navigate(`/dashboard/project/${project.project_id}`);
   };
 
   const handleMenu = (e) => {

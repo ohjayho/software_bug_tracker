@@ -33,7 +33,7 @@ function App() {
             element={<AuthenticatedRoute Component={DashBoard} />}
           />
           <Route
-            path="/dashboard/project/:id"
+            path="/dashboard/project/:project_id"
             element={<AuthenticatedRoute Component={ProjectPage} />}
           />
           <Route

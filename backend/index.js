@@ -35,17 +35,17 @@ app.get("/users", (req, res) => {
   });
 });
 
-app.get("/project_members/:id", (req, res) => {
-  const members = `SELECT member FROM project_members WHERE project_id='${req.params.id}';`;
+app.get("/project_members/:project_id", (req, res) => {
+  const members = `SELECT member FROM project_members WHERE project_id='${req.params.project_id}';`;
   db.query(members, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
   });
 });
 
-app.get("/project_team/:id", (req, res) => {
-  const members = `SELECT * FROM users u JOIN project_members pm ON u.id = pm.member WHERE pm.project_id = '${req.params.id}';`;
-  const notSelectedMembers = `SELECT u.id FROM users u WHERE NOT EXISTS (SELECT pm.member FROM project_members pm WHERE u.id = pm.member AND pm.project_id = '${req.params.id}')`;
+app.get("/project_team/:project_id", (req, res) => {
+  const members = `SELECT * FROM users u JOIN project_members pm ON u.id = pm.member WHERE pm.project_id = '${req.params.project_id}';`;
+  const notSelectedMembers = `SELECT u.id FROM users u WHERE NOT EXISTS (SELECT pm.member FROM project_members pm WHERE u.id = pm.member AND pm.project_id = '${req.params.project_id}')`;
 
   db.query(members + notSelectedMembers, (err, data) => {
     if (err) return res.json(err);
@@ -82,10 +82,10 @@ app.post("/users", (req, res) => {
 
 app.post("/projects", (req, res) => {
   const q =
-    "INSERT INTO projects (id, name, description , author_id) VALUES (?)";
+    "INSERT INTO projects (project_id, name, description , author_id) VALUES (?)";
 
-  const { id, name, description, author_id } = req.body;
-  const values = [id, name, description, author_id];
+  const { project_id, name, description, author_id } = req.body;
+  const values = [project_id, name, description, author_id];
 
   db.query(q, [values], (err, data) => {
     if (err) {
