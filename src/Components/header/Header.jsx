@@ -1,9 +1,12 @@
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import { useState } from "react";
 import "./Header.css";
-import logo from "../../assets/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChalkboard, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBug,
+  faChalkboard,
+  faCircleInfo
+} from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const [user, setUser] = useState(localStorage.getItem("currentUser"));
@@ -24,7 +27,7 @@ const Header = () => {
     <header>
       <div className="header_logo">
         <Link to="/dashboard">
-          <img src={logo} alt="" />
+          <FontAwesomeIcon icon={faBug} className="icon" />
         </Link>
       </div>
       <div className="header_container">
