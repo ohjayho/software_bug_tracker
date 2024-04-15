@@ -1,14 +1,17 @@
 import "./TeamDropDown.css";
 import axios from "axios";
 
-const TeamDropDown = ({}) => {
+const TeamDropDown = ({ member, id }) => {
   const handleDelete = async () => {
-    // try {
-    //   await axios.delete(`http://localhost:8800/projects/${project_id}`);
-    // } catch (err) {
-    //   console.log(err);
-    // }
-    // location.reload();
+    const memberInfo = { member: member, project_id: id };
+    try {
+      await axios.delete(`http://localhost:8800/project_members`, {
+        data: memberInfo
+      });
+    } catch (err) {
+      console.log(err);
+    }
+    location.reload();
   };
 
   return (
