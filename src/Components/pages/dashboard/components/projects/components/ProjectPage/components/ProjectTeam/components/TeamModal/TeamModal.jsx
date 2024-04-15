@@ -2,17 +2,17 @@ import "./TeamModal.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const TeamModal = ({ notSelectedTeam, setTeamModalOpen, id }) => {
+const TeamModal = ({ notSelectedTeam, setTeamModalOpen, project_id }) => {
   const [addMembers, setAddMembers] = useState([]);
   const [newMembers, setNewMembers] = useState([]);
   const [initialRender, setInitialRender] = useState(true);
 
   const handleMembers = (e) => {
     let selected = [];
-    console.log("모달id", id);
+    console.log("모달id", project_id);
     Array.prototype.forEach.call(e.target.options, function (opt) {
       if (opt.selected) {
-        selected = [...selected, [id, opt.value]];
+        selected = [...selected, [project_id, opt.value]];
       }
     });
     setAddMembers(selected);

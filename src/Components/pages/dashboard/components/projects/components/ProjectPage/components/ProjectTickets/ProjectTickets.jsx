@@ -7,7 +7,7 @@ import { createPortal } from "react-dom";
 import axios from "axios";
 import TicketModal from "./components/TicketModal/TicketModal";
 
-const ProjectTickets = ({ setSelectedTicket, id, team }) => {
+const ProjectTickets = ({ setSelectedTicket, project_id, team }) => {
   const [storedTickets, setStoredTickets] = useState([]);
   const [ticketModalOpen, setTicketModalOpen] = useState(false);
 
@@ -15,7 +15,7 @@ const ProjectTickets = ({ setSelectedTicket, id, team }) => {
     const getTickets = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8800/project_tickets/${id}`
+          `http://localhost:8800/project_tickets/${project_id}`
         );
         setStoredTickets(res.data);
       } catch (err) {
@@ -29,7 +29,11 @@ const ProjectTickets = ({ setSelectedTicket, id, team }) => {
     <>
       {ticketModalOpen &&
         createPortal(
-          <TicketModal setTicketModalOpen={setTicketModalOpen} team={team} />,
+          <TicketModal
+            setTicketModalOpen={setTicketModalOpen}
+            team={team}
+            project_id={project_id}
+          />,
           document.body
         )}
       <div className="project_tickets_container border_shadow_component components_container">

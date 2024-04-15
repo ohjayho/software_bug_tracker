@@ -6,14 +6,16 @@ import TeamModal from "./components/TeamModal/TeamModal";
 import TeamMember from "./components/TeamMember/TeamMember";
 import axios from "axios";
 
-const ProjectTeam = ({ id, team, setTeam }) => {
+const ProjectTeam = ({ project_id, team, setTeam }) => {
   // const [team, setTeam] = useState([]);
   const [teamModalOpen, setTeamModalOpen] = useState(false);
 
   useEffect(() => {
     const getTeam = async () => {
       try {
-        const res = await axios.get(`http://localhost:8800/project_team/${id}`);
+        const res = await axios.get(
+          `http://localhost:8800/project_team/${project_id}`
+        );
         setTeam(res.data);
       } catch (err) {
         console.log(err);
@@ -29,7 +31,7 @@ const ProjectTeam = ({ id, team, setTeam }) => {
           <TeamModal
             notSelectedTeam={team[1]}
             setTeamModalOpen={setTeamModalOpen}
-            id={id}
+            project_id={project_id}
           />,
           document.body
         )}
@@ -56,7 +58,9 @@ const ProjectTeam = ({ id, team, setTeam }) => {
           <tbody>
             {team.length > 0 &&
               team[0].map((mb) => {
-                return <TeamMember key={mb.member} mb={mb} id={id} />;
+                return (
+                  <TeamMember key={mb.member} mb={mb} project_id={project_id} />
+                );
               })}
           </tbody>
         </table>

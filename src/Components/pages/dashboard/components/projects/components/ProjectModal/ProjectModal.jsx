@@ -55,7 +55,7 @@ const ProjectModal = ({ setModalOpen }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newProject = {
-      id: uuid,
+      project_id: uuid,
       name: name,
       description: description,
       author_id: currentUser

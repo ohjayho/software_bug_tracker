@@ -6,7 +6,7 @@ import SelectedTicket from "./components/ProjectTickets/components/SelectedTicke
 import { useState } from "react";
 
 const ProjectPage = () => {
-  const { id } = useParams();
+  const { project_id } = useParams();
   const [selectedTicket, setSelectedTicket] = useState(false);
   // to pass team data to both ProjectTeam and ProjectTickets, declare useState here.
   // Actual assigning is happening in ProjectTeam in the useEffect
@@ -16,9 +16,9 @@ const ProjectPage = () => {
     <div className="project_page_container">
       <h1 className="header_project_page title_container">PROJECT</h1>
       <div className="upper_section_project_page">
-        <ProjectTeam id={id} team={team} setTeam={setTeam} />
+        <ProjectTeam project_id={project_id} team={team} setTeam={setTeam} />
         <ProjectTickets
-          id={id}
+          project_id={project_id}
           setSelectedTicket={setSelectedTicket}
           team={team[0]}
         />
