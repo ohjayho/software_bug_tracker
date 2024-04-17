@@ -53,9 +53,30 @@ app.get("/project_team/:project_id", (req, res) => {
   });
 });
 
+app.get("/project_tickets", (req, res) => {
+  const type =
+    "SELECT type, count(author) AS cnt FROM project_tickets GROUP BY type;";
+  const status =
+    "SELECT status, count(author) AS cnt FROM project_tickets GROUP BY status;";
+  const priority =
+    "SELECT priority, count(author) AS cnt FROM project_tickets GROUP BY priority";
+  db.query(type + status + priority, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
 app.get("/project_tickets/:project_id", (req, res) => {
-  const tickets = `SELECT * FROM project_tickets WHERE project_id='${req.params.project_id}';`;
+  const tickets = `SELECT * FROM project_tickets WHERE project_id='${req.params.project_id}' ORDER BY created_at DESC;`;
   db.query(tickets, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
+app.get("/ticket_devs/:ticket_id", (req, res) => {
+  const devs = `SELECT assigned_dev FROM ticket_devs WHERE ticket_id='${req.params.ticket_id}';`;
+  db.query(devs, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
   });
@@ -145,9 +166,19 @@ app.post("/project_tickets", (req, res) => {
   console.log("ticket added successfully!");
 });
 
-// app.post('/ticket_members', (req,res)=>{
-//   const q =
-// })
+app.post("/ticket_devs", (req, res) => {
+  const q = `INSERT INTO ticket_devs (ticket_id, assigned_dev) VALUES ?`;
+  const devs = req.body;
+  console.log("devs", [devs]);
+  db.query(q, [devs], (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.json(err);
+    }
+    return res.json(data);
+  });
+  console.log("devs added successfully!");
+});
 
 /*end of post */
 
