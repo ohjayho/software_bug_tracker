@@ -23,7 +23,6 @@ const Comments = ({ ticket_id }) => {
       }
     };
     getComments();
-    console.log("코멘트가져왓다", comments);
   }, []);
 
   const handleCommentSubmit = async (e) => {
