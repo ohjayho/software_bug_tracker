@@ -1,8 +1,7 @@
 import "../../../../../../../../components.css";
 import "./SelectedTicket.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import AssignedDevs from "./components/AssignedDevs/AssignedDevs";
+import Comments from "./components/Comments/Comments";
 
 const SelectedTicket = ({ selectedTicket, selectedTicketOpen }) => {
   return (
@@ -59,36 +58,7 @@ const SelectedTicket = ({ selectedTicket, selectedTicketOpen }) => {
               <AssignedDevs selectedTicket={selectedTicket} />
             </div>
           </div>
-          <div className="comments_section_selected_ticket border_shadow_component">
-            <div className="header_comments_section">
-              <h1 className="title_comments_section">Comments</h1>
-            </div>
-            <div className="comment border_shadow_component">
-              <div className="header_comment">
-                <div className="header_author_section">
-                  <h3 className="author_comment">JayHo Oh</h3>
-                  <h3 className="author_dot">·</h3>
-                  <h4 className="author_time">June 12th 2021, 6:02:28pm</h4>
-                </div>
-                <button className="btn_delete_comment">
-                  <FontAwesomeIcon icon={faTrashCan} />
-                </button>
-              </div>
-              <div className="content_comment">
-                Welcome, James please help here
-              </div>
-            </div>
-            <div className="add_comment_section">
-              <input
-                type="text"
-                className="input_add_comment"
-                name=""
-                id=""
-                placeholder="Enter comment"
-              />
-              <button className="btn_add_comment btn_new">Comment</button>
-            </div>
-          </div>
+          <Comments ticket_id={selectedTicket.ticket_id} />
         </div>
       ) : (
         <div className="no_ticket_selected_ticket">

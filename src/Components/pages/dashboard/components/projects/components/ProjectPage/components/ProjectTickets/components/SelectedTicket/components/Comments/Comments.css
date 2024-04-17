@@ -1,0 +1,65 @@
+.comments_section_selected_ticket {
+  width: 49%;
+  padding: 0 10px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px;
+}
+
+.header_comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_author_section {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+}
+
+.title_comments_section {
+  font-size: 18px;
+}
+
+.author_comment {
+  margin-right: 5px;
+}
+
+.author_time {
+  margin-left: 5px;
+}
+
+.btn_delete_comment {
+  background-color: rgb(230, 55, 55);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+}
+
+.add_comment_section {
+  display: flex;
+  margin-top: 30px;
+}
+
+.input_add_comment {
+  flex: 1;
+  border: 1px solid #c0c0c0;
+  border-radius: 5px;
+  border-right: none;
+  border-top-right-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.input_add_comment:focus {
+  outline-color: #c0c0c0;
+}
+
+.btn_add_comment {
+  border-top-left-radius: 1px;
+  border-end-start-radius: 1px;
+}
