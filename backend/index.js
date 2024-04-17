@@ -82,6 +82,14 @@ app.get("/ticket_devs/:ticket_id", (req, res) => {
   });
 });
 
+app.get("/ticket_comments/:ticket_id", (req, res) => {
+  const q = `SELECT * FROM ticket_comments WHERE ticket_id = '${req.params.ticket_id}'`;
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
 /*end of get */
 
 app.post("/users", (req, res) => {
@@ -178,6 +186,20 @@ app.post("/ticket_devs", (req, res) => {
     return res.json(data);
   });
   console.log("devs added successfully!");
+});
+
+app.post("/ticket_comments", (req, res) => {
+  const comment = req.body;
+  const q =
+    "INSERT INTO ticket_comments (comment_id, ticket_id, author, description) VALUES (?)";
+  db.query(q, [comment], (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.json(err);
+    }
+    return res.json(data);
+  });
+  console.log("comment added!");
 });
 
 /*end of post */
