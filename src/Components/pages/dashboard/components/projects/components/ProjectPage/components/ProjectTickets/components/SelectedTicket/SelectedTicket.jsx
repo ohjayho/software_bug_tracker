@@ -2,9 +2,9 @@ import "../../../../../../../../components.css";
 import "./SelectedTicket.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import AssignedDevs from "./components/AssignedDevs/AssignedDevs";
 
 const SelectedTicket = ({ selectedTicket, selectedTicketOpen }) => {
-  console.log(selectedTicket, "흐음");
   return (
     <div className="selected_ticket_container border_shadow_component components_container">
       <div className="header_selected_ticket">
@@ -56,7 +56,7 @@ const SelectedTicket = ({ selectedTicket, selectedTicketOpen }) => {
               <div className="title_assigned_devs header_table_selected_ticket">
                 Assigned devs
               </div>
-              <div>Jay</div>
+              <AssignedDevs selectedTicket={selectedTicket} />
             </div>
           </div>
           <div className="comments_section_selected_ticket border_shadow_component">

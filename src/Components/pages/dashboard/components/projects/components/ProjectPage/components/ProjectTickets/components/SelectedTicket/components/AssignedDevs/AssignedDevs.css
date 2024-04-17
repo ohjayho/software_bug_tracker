@@ -1,0 +1,7 @@
+.devs_container {
+  display: flex;
+}
+
+.assigned_dev {
+  margin-right: 8px;
+}
