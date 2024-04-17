@@ -4,10 +4,9 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
 const TicketModal = ({ setTicketModalOpen, team, project_id }) => {
-  console.log("아뒤아뒤", project_id);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [assignDevs, setAssignDevs] = useState([]);
+  const [assignedDevs, setAssignedDevs] = useState([]);
   const [timeEstimate, setTimeEstimate] = useState("");
   const [type, setType] = useState("ISSUE");
   const [priority, setPriority] = useState("URGENT");
@@ -19,10 +18,10 @@ const TicketModal = ({ setTicketModalOpen, team, project_id }) => {
     let selected = [];
     Array.prototype.forEach.call(e.target.options, function (opt) {
       if (opt.selected) {
-        selected.push([project_id, opt.value]);
+        selected.push([ticketId, opt.value]);
       }
     });
-    setAssignDevs(selected);
+    setAssignedDevs(selected);
   };
 
   const handleSubmit = async (e) => {
@@ -40,10 +39,11 @@ const TicketModal = ({ setTicketModalOpen, team, project_id }) => {
     };
     try {
       await axios.post("http://localhost:8800/project_tickets", newTicket);
-      // await axios.post("http://localhost:8800/ticket_members", assignDevs);
+      await axios.post("http://localhost:8800/ticket_devs", assignedDevs);
     } catch (err) {
       console.log(err);
     }
+    location.reload();
   };
   return (
     <div className="modal_container">
@@ -101,6 +101,7 @@ const TicketModal = ({ setTicketModalOpen, team, project_id }) => {
                 name=""
                 id=""
                 onChange={(e) => setTimeEstimate(e.target.value)}
+                required
               />
             </div>
           </div>
