@@ -37,6 +37,7 @@ const Comments = ({ ticket_id }) => {
     } catch (err) {
       console.log(err);
     }
+    e.target.firstChild.value = "";
   };
 
   return (
