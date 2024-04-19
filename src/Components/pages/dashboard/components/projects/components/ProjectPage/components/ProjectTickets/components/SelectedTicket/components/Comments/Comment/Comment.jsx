@@ -1,9 +1,21 @@
 import "../Comments.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import { useState } from "react";
 
 const Comment = ({ comment }) => {
-  console.log("코멘트", comment);
+  const handleDelete = async () => {
+    try {
+      await axios.delete(
+        `http://localhost:8800/ticket_comments/${comment.comment_id}`
+      );
+    } catch (err) {
+      console.log(err);
+    }
+    // to make it re-render, change the state of comments
+    // it's meaningless variable for making it re-render
+  };
   return (
     <div className="comment border_shadow_component">
       <div className="header_comment">
@@ -14,7 +26,7 @@ const Comment = ({ comment }) => {
             {new Date(comment.created_at).toLocaleString()}
           </h4>
         </div>
-        <button className="btn_delete_comment">
+        <button onClick={handleDelete} className="btn_delete_comment">
           <FontAwesomeIcon icon={faTrashCan} />
         </button>
       </div>
