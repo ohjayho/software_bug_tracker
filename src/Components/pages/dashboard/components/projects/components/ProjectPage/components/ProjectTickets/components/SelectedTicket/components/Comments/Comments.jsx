@@ -6,10 +6,11 @@ import Comment from "./Comment/Comment";
 
 const Comments = ({ ticket_id }) => {
   const [comments, setComments] = useState([]);
-  const [comment, setComment] = useState("");
+  const [description, setDescription] = useState("");
   const [currentUser, setCurrentUser] = useState(
     localStorage.getItem("currentUser")
   );
+  const [rerender, setRerender] = useState(false);
 
   useEffect(() => {
     const getComments = async () => {
@@ -23,14 +24,16 @@ const Comments = ({ ticket_id }) => {
       }
     };
     getComments();
-  }, []);
+  }, [rerender]);
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     const comment_id = uuidv4();
-    const newComment = [comment_id, ticket_id, currentUser, comment];
+    const newComment = [comment_id, ticket_id, currentUser, description];
     try {
       await axios.post("http://localhost:8800/ticket_comments", newComment);
+      // this state variable is for re-rendering,
+      setRerender((rerender) => !rerender);
     } catch (err) {
       console.log(err);
     }
@@ -43,7 +46,7 @@ const Comments = ({ ticket_id }) => {
       </div>
       {comments.length > 0 &&
         comments.map((comment) => {
-          return <Comment comment={comment} />;
+          return <Comment comment={comment} key={comment.comment_id} />;
         })}
       <form className="add_comment_section" onSubmit={handleCommentSubmit}>
         <input
@@ -52,7 +55,7 @@ const Comments = ({ ticket_id }) => {
           name=""
           id=""
           placeholder="Enter comment"
-          onChange={(e) => setComment(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
         />
         <button className="btn_add_comment btn_new">Comment</button>
       </form>
