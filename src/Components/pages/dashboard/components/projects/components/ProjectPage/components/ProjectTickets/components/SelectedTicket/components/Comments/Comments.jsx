@@ -46,7 +46,13 @@ const Comments = ({ ticket_id }) => {
       </div>
       {comments.length > 0 &&
         comments.map((comment) => {
-          return <Comment comment={comment} key={comment.comment_id} />;
+          return (
+            <Comment
+              comment={comment}
+              key={comment.comment_id}
+              setRerender={setRerender}
+            />
+          );
         })}
       <form className="add_comment_section" onSubmit={handleCommentSubmit}>
         <input

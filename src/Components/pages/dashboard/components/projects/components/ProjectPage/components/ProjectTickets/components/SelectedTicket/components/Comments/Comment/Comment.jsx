@@ -4,12 +4,14 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useState } from "react";
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, setRerender }) => {
   const handleDelete = async () => {
     try {
       await axios.delete(
         `http://localhost:8800/ticket_comments/${comment.comment_id}`
       );
+      //for re-rendering, use setRerender from its parent component
+      setRerender((rerender) => !rerender);
     } catch (err) {
       console.log(err);
     }
