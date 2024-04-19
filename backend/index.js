@@ -83,7 +83,7 @@ app.get("/ticket_devs/:ticket_id", (req, res) => {
 });
 
 app.get("/ticket_comments/:ticket_id", (req, res) => {
-  const q = `SELECT * FROM ticket_comments WHERE ticket_id = '${req.params.ticket_id}'`;
+  const q = `SELECT * FROM ticket_comments WHERE ticket_id = '${req.params.ticket_id}' ORDER BY created_at DESC`;
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
@@ -227,6 +227,18 @@ app.delete("/project_members", (req, res) => {
     return res.json(data);
   });
   console.log("Successfully deleted!");
+});
+
+app.delete("/ticket_comments/:comment_id", (req, res) => {
+  const q = `DELETE FROM ticket_comments WHERE comment_id = '${req.params.comment_id}'`;
+  db.query(q, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.json(err);
+    }
+    return res.json(data);
+  });
+  console.log("Successfully delted the comment!");
 });
 
 app.listen(8800, () => {
