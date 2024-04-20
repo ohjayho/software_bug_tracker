@@ -2,7 +2,6 @@ import "../Comments.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { useState } from "react";
 
 const Comment = ({ comment, setRerender }) => {
   const handleDelete = async () => {
