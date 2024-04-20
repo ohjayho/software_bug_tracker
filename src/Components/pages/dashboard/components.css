@@ -94,6 +94,7 @@ td[colspan]:not([colspan="1"]) {
   align-items: center;
   width: 20px;
   height: 20px;
+  cursor: pointer;
 }
 
 .btns_pagination_container {

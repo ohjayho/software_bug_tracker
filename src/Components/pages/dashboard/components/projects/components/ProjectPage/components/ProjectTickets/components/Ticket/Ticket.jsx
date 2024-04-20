@@ -1,3 +1,5 @@
+import "./Ticket.css";
+
 const Ticket = ({ ticket, setSelectedTicket, setSelectedTicketOpen }) => {
   const handleTicketClick = () => {
     setSelectedTicket(ticket);
