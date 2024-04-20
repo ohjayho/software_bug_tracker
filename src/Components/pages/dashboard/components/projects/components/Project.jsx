@@ -4,7 +4,7 @@ import axios from "axios";
 import "./Project.css";
 import DropDownMenu from "./DropDownMenu/DropDownMenu";
 
-const Project = ({ project }) => {
+const Project = ({ project, setModalOpen }) => {
   const [contributors, setContributors] = useState([]);
   const [dropDownMenuOpen, setDropDownMenuOpen] = useState(false);
 
@@ -67,7 +67,10 @@ const Project = ({ project }) => {
           >
             :
             {dropDownMenuOpen && (
-              <DropDownMenu project_id={project.project_id} />
+              <DropDownMenu
+                project_id={project.project_id}
+                setModalOpen={setModalOpen}
+              />
             )}
           </div>
         </div>

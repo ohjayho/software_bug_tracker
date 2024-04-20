@@ -52,7 +52,13 @@ const Projects = () => {
           <tbody>
             {projects.length ? (
               projects.map((prj) => {
-                return <Project project={prj} key={prj.project_id} />;
+                return (
+                  <Project
+                    project={prj}
+                    key={prj.project_id}
+                    setModalOpen={setModalOpen}
+                  />
+                );
               })
             ) : (
               <tr>
