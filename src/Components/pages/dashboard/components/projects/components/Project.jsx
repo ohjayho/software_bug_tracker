@@ -1,12 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { createPortal } from "react-dom";
 import axios from "axios";
 import "./Project.css";
 import DropDownMenu from "./DropDownMenu/DropDownMenu";
+import ProjectModal from "./ProjectModal/ProjectModal";
 
-const Project = ({ project, setModalOpen }) => {
+const Project = ({ project }) => {
   const [contributors, setContributors] = useState([]);
   const [dropDownMenuOpen, setDropDownMenuOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const getContributors = async () => {
@@ -50,32 +53,36 @@ const Project = ({ project, setModalOpen }) => {
   };
 
   return (
-    <tr className="project_table" onClick={handleClick}>
-      <td>{project.name}</td>
-      <td>{project.description}</td>
-      <td>
-        <div className="contributors_table last_column_table">
-          <div className="members_contributors">
-            {contributors.map((contributor) => {
-              return <div key={contributor.member}>{contributor.member}</div>;
-            })}
+    <>
+      {modalOpen &&
+        createPortal(
+          <ProjectModal setModalOpen={setModalOpen} projectInfo={project} />,
+          document.body
+        )}
+      <tr className="project_table" onClick={handleClick}>
+        <td>{project.name}</td>
+        <td>{project.description}</td>
+        <td>
+          <div className="contributors_table last_column_table">
+            <div className="members_contributors">
+              {contributors.map((contributor) => {
+                return <div key={contributor.member}>{contributor.member}</div>;
+              })}
+            </div>
+            <div
+              className="menu_dots"
+              ref={menuRef}
+              onClick={(e) => handleMenu(e)}
+            >
+              :
+              {dropDownMenuOpen && (
+                <DropDownMenu project={project} setModalOpen={setModalOpen} />
+              )}
+            </div>
           </div>
-          <div
-            className="menu_dots"
-            ref={menuRef}
-            onClick={(e) => handleMenu(e)}
-          >
-            :
-            {dropDownMenuOpen && (
-              <DropDownMenu
-                project_id={project.project_id}
-                setModalOpen={setModalOpen}
-              />
-            )}
-          </div>
-        </div>
-      </td>
-    </tr>
+        </td>
+      </tr>
+    </>
   );
 };
 
