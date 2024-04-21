@@ -69,6 +69,8 @@ const ProjectTickets = ({
                     setSelectedTicket={setSelectedTicket}
                     setSelectedTicketOpen={setSelectedTicketOpen}
                     key={ticket.ticket_id}
+                    team={team}
+                    project_id={project_id}
                   />
                 );
               })
