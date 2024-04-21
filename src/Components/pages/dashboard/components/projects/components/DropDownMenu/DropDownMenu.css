@@ -7,6 +7,8 @@
   background-color: rgb(255, 255, 255);
   width: 140px;
   color: black;
+  font-size: 15px;
+  font-weight: normal;
 }
 
 .btns_dropdown {
