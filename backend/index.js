@@ -127,9 +127,9 @@ app.post("/projects", (req, res) => {
 });
 
 app.post("/project_members", (req, res) => {
-  const q = "INSERT INTO project_members (project_id, member) VALUES (?)";
+  const q = "INSERT INTO project_members (project_id, member) VALUES ?";
   const values = req.body;
-  db.query(q, values, (err, data) => {
+  db.query(q, [values], (err, data) => {
     if (err) {
       console.log(err);
       return res.json(err);
@@ -203,6 +203,21 @@ app.post("/ticket_comments", (req, res) => {
 });
 
 /*end of post */
+
+app.put("/projects", (req, res) => {
+  const { name, description, project_id } = req.body;
+  const q = `UPDATE projects SET name = '${name}', description = '${description}' WHERE project_id = '${project_id}'`;
+  db.query(q, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.json(err);
+    }
+    return res.json(data);
+  });
+  console.log("successfully updated the project!");
+});
+
+/*end of update */
 
 app.delete("/projects/:project_id", (req, res) => {
   const q = `DELETE FROM projects WHERE project_id = '${req.params.project_id}'`;
