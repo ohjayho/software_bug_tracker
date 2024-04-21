@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
-const TicketModal = ({ setTicketModalOpen, team, project_id }) => {
+const TicketModal = ({ setTicketModalOpen, team, project_id, ticket }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [assignedDevs, setAssignedDevs] = useState([]);
@@ -37,11 +37,23 @@ const TicketModal = ({ setTicketModalOpen, team, project_id }) => {
       priority: priority,
       status: status
     };
-    try {
-      await axios.post("http://localhost:8800/project_tickets", newTicket);
-      await axios.post("http://localhost:8800/ticket_devs", assignedDevs);
-    } catch (err) {
-      console.log(err);
+
+    if (ticket) {
+      // if edit mode
+      try {
+        await axios.put("http://localhost:8800/project_tickets", newTicket);
+        // await axios.put("http://localhost:8800/ticket_devs", assignedDevs);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      // if new ticket mode
+      try {
+        await axios.post("http://localhost:8800/project_tickets", newTicket);
+        await axios.post("http://localhost:8800/ticket_devs", assignedDevs);
+      } catch (err) {
+        console.log(err);
+      }
     }
     location.reload();
   };
@@ -49,7 +61,9 @@ const TicketModal = ({ setTicketModalOpen, team, project_id }) => {
     <div className="modal_container">
       <form className="modal" onSubmit={handleSubmit}>
         <div className="header_modal">
-          <h1 className="title_modal">Create Ticket</h1>
+          <h1 className="title_modal">
+            {ticket ? "Edit Ticket" : "Create Ticket"}
+          </h1>
           <h1
             className="close_btn_modal"
             onClick={() => {
@@ -64,9 +78,10 @@ const TicketModal = ({ setTicketModalOpen, team, project_id }) => {
             <h2 className="subtitle_modal">Title</h2>
             <input
               type="text"
-              className="input_name"
+              className="input_title"
               required
               onChange={(e) => setTitle(e.target.value)}
+              defaultValue={ticket ? ticket.title : ""}
             />
           </div>
           <div className="description_section_modal section_modal">
@@ -79,6 +94,7 @@ const TicketModal = ({ setTicketModalOpen, team, project_id }) => {
               className="textarea_modal"
               required
               onChange={(e) => setDescription(e.target.value)}
+              defaultValue={ticket ? ticket.description : ""}
             ></textarea>
           </div>
           <div className="middle_section_modal">
@@ -102,6 +118,7 @@ const TicketModal = ({ setTicketModalOpen, team, project_id }) => {
                 id=""
                 onChange={(e) => setTimeEstimate(e.target.value)}
                 required
+                defaultValue={ticket ? ticket.time_estimate : ""}
               />
             </div>
           </div>
@@ -110,7 +127,7 @@ const TicketModal = ({ setTicketModalOpen, team, project_id }) => {
               <h2 className="title_type subtitle_modal">Type</h2>
               <select
                 onChange={(e) => setType(e.target.value)}
-                defaultValue={"hey"}
+                defaultValue={ticket ? ticket.type : "hey"}
               >
                 <option value="ISSUE">ISSUE</option>
                 <option value="VULNERABILITY">VULNERABILITY</option>
@@ -120,7 +137,10 @@ const TicketModal = ({ setTicketModalOpen, team, project_id }) => {
             </div>
             <div className="priority_modal inputs_bottom ticket_inputs">
               <h2 className="title_priority subtitle_modal">Priority</h2>
-              <select onChange={(e) => setPriority(e.target.value)}>
+              <select
+                onChange={(e) => setPriority(e.target.value)}
+                defaultValue={ticket ? ticket.priority : ""}
+              >
                 <option value="URGENT">URGENT</option>
                 <option value="HIGH">HIGH</option>
                 <option value="MEDIUM">MEDIUM</option>
@@ -129,7 +149,10 @@ const TicketModal = ({ setTicketModalOpen, team, project_id }) => {
             </div>
             <div className="status_modal inputs_bottom ticket_inputs">
               <h2 className="title_status subtitle_modal">Status</h2>
-              <select onChange={(e) => setStatus(e.target.value)}>
+              <select
+                onChange={(e) => setStatus(e.target.value)}
+                defaultValue={ticket ? ticket.status : ""}
+              >
                 <option value="TO DO">TO DO</option>
                 <option value="IN PROGRESS">IN PROGRESS</option>
                 <option value="READY FOR REVIEW">READY FOR REVIEW</option>
