@@ -1,0 +1,19 @@
+.ticket_drop_down_menu_container {
+  position: absolute;
+  left: -135px;
+  top: -50px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  width: 140px;
+  color: black;
+}
+
+.btns_dropdown {
+  padding: 10px 10px;
+}
+
+.drop_down_menu_container > div:hover {
+  background-color: #33a70f;
+  color: white;
+}
