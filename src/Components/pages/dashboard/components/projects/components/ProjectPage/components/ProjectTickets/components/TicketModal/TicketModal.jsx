@@ -4,10 +4,14 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
 const TicketModal = ({ setTicketModalOpen, team, project_id, ticket }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(ticket ? ticket.title : "");
+  const [description, setDescription] = useState(
+    ticket ? ticket.description : ""
+  );
   const [assignedDevs, setAssignedDevs] = useState([]);
-  const [timeEstimate, setTimeEstimate] = useState("");
+  const [timeEstimate, setTimeEstimate] = useState(
+    ticket ? ticket.time_estimate : ""
+  );
   const [type, setType] = useState("ISSUE");
   const [priority, setPriority] = useState("URGENT");
   const [status, setStatus] = useState("TO DO");
@@ -27,7 +31,7 @@ const TicketModal = ({ setTicketModalOpen, team, project_id, ticket }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newTicket = {
-      ticket_id: ticketId,
+      ticket_id: ticket ? ticket.ticket_id : ticketId,
       project_id: project_id,
       title: title,
       description: description,
@@ -42,7 +46,10 @@ const TicketModal = ({ setTicketModalOpen, team, project_id, ticket }) => {
       // if edit mode
       try {
         await axios.put("http://localhost:8800/project_tickets", newTicket);
-        // await axios.put("http://localhost:8800/ticket_devs", assignedDevs);
+        await axios.put(
+          `http://localhost:8800/ticket_devs/${ticket.ticket_id}`,
+          assignedDevs
+        );
       } catch (err) {
         console.log(err);
       }
