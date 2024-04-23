@@ -2,13 +2,20 @@ import "./forms.css";
 import "./SignUpForm.css";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faUnlock } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faUnlock,
+  faEnvelope,
+  faPhone
+} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 const SignUpForm = (props) => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [existUser, setExistUser] = useState([]);
   const setRegister = props.setRegister;
 
@@ -17,7 +24,6 @@ const SignUpForm = (props) => {
       try {
         const res = await axios.get("http://localhost:8800/users");
         setExistUser(res.data);
-        console.log("데이타", res.data);
       } catch (err) {
         console.log(err);
       }
@@ -39,7 +45,9 @@ const SignUpForm = (props) => {
           try {
             await axios.post("http://localhost:8800/users", {
               id: id,
-              pw: pw
+              pw: pw,
+              email: email,
+              phone: phone
             });
           } catch (err) {
             console.log(err);
@@ -92,6 +100,32 @@ const SignUpForm = (props) => {
               placeholder="Confirm Password"
               required
               onChange={(e) => setConfirmPw(e.target.value)}
+            />
+          </div>
+          <div className="input_container signup_input_container input_email">
+            <FontAwesomeIcon icon={faEnvelope} />
+            <input
+              type="email"
+              name="email"
+              id="signup_email"
+              className="input_field signup_input_field"
+              placeholder="Email"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="input_container signup_input_container input_phone">
+            <FontAwesomeIcon icon={faPhone} />
+            <input
+              type="tel"
+              name="phone"
+              id="signup_phone"
+              className="input_field signup_input_field"
+              title="형식 010-0000-0000"
+              placeholder="Phone number"
+              required
+              pattern="(010)-\d{3,4}-\d{4}"
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
           <div className="btn_field signup_btns_container">
