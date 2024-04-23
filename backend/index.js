@@ -217,7 +217,46 @@ app.put("/projects", (req, res) => {
   console.log("successfully updated the project!");
 });
 
-/*end of update */
+app.put("/project_tickets", (req, res) => {
+  const {
+    ticket_id,
+    title,
+    description,
+    time_estimate,
+    type,
+    priority,
+    status
+  } = req.body;
+
+  const q = `UPDATE project_tickets SET title = '${title}', description = '${description}', time_estimate = '${time_estimate}', type = '${type}', priority = '${priority}', status = '${status}' WHERE ticket_id = '${ticket_id}'`;
+
+  db.query(q, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.json(err);
+    }
+    return res.json(data);
+  });
+
+  console.log("successfully updated the ticket!");
+});
+
+app.put("/ticket_devs/:ticket_id", (req, res) => {
+  const devs = [req.body.map((dev) => dev[1])];
+  const ticket_id = req.params.ticket_id;
+  const q = `UPDATE ticket_devs SET assigned_dev = '${devs}' WHERE ticket_id = '${ticket_id}'`;
+  console.log(q);
+  db.query(q, [devs], (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.json(err);
+    }
+    return res.json(data);
+  });
+  console.log("devs updated successfully!");
+});
+
+/*end of put */
 
 app.delete("/projects/:project_id", (req, res) => {
   const q = `DELETE FROM projects WHERE project_id = '${req.params.project_id}'`;
