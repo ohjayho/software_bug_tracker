@@ -17,10 +17,10 @@ projectsRouter.get("/", (req, res) => {
 
 projectsRouter.post("/", (req, res) => {
   const q =
-    "INSERT INTO projects (project_id, name, description , author_id) VALUES (?)";
+    "INSERT INTO projects (id, name, description , author_id) VALUES (?)";
 
-  const { project_id, name, description, author_id } = req.body;
-  const values = [project_id, name, description, author_id];
+  const { id, name, description, author_id } = req.body;
+  const values = [id, name, description, author_id];
 
   db.query(q, [values], (err, data) => {
     if (err) {
@@ -34,8 +34,8 @@ projectsRouter.post("/", (req, res) => {
 });
 
 projectsRouter.put("/", (req, res) => {
-  const { name, description, project_id } = req.body;
-  const q = `UPDATE projects SET name = '${name}', description = '${description}' WHERE project_id = '${project_id}'`;
+  const { name, description, id } = req.body;
+  const q = `UPDATE projects SET name = '${name}', description = '${description}' WHERE id = '${id}'`;
   db.query(q, (err, data) => {
     if (err) {
       console.log(err);
@@ -46,8 +46,8 @@ projectsRouter.put("/", (req, res) => {
   console.log("successfully updated the project!");
 });
 
-projectsRouter.delete("/:project_id", (req, res) => {
-  const q = `DELETE FROM projects WHERE project_id = '${req.params.project_id}'`;
+projectsRouter.delete("/:id", (req, res) => {
+  const q = `DELETE FROM projects WHERE id = '${req.params.id}'`;
 
   db.query(q, (err, data) => {
     if (err) {

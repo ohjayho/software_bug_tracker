@@ -7,9 +7,7 @@ const DropDownMenu = ({ project, setModalOpen }) => {
   };
   const handleDelete = async () => {
     try {
-      await axios.delete(
-        `http://localhost:8800/projects/${project.project_id}`
-      );
+      await axios.delete(`http://localhost:8800/projects/${project.id}`);
     } catch (err) {
       console.log(err);
     }

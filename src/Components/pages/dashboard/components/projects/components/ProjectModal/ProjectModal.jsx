@@ -58,7 +58,7 @@ const ProjectModal = ({ setModalOpen, projectInfo }) => {
     e.preventDefault();
     const newProject = {
       //if projectInfo is true, which means if it's editing mode
-      project_id: projectInfo ? projectInfo.project_id : uuid,
+      id: projectInfo ? projectInfo.id : uuid,
       name: name,
       description: description,
       author_id: currentUser
