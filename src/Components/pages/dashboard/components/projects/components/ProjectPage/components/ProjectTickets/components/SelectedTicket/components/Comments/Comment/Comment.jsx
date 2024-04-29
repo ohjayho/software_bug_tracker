@@ -6,16 +6,12 @@ import axios from "axios";
 const Comment = ({ comment, setRerender }) => {
   const handleDelete = async () => {
     try {
-      await axios.delete(
-        `http://localhost:8800/ticket_comments/${comment.comment_id}`
-      );
+      await axios.delete(`http://localhost:8800/ticket_comments/${comment.id}`);
       //for re-rendering, use setRerender from its parent component
       setRerender((rerender) => !rerender);
     } catch (err) {
       console.log(err);
     }
-    // to make it re-render, change the state of comments
-    // it's meaningless variable for making it re-render
   };
   return (
     <div className="comment border_shadow_component">

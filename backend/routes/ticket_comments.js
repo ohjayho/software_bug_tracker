@@ -18,7 +18,7 @@ ticketCommentsRouter.get("/:ticket_id", (req, res) => {
 ticketCommentsRouter.post("/", (req, res) => {
   const comment = req.body;
   const q =
-    "INSERT INTO ticket_comments (comment_id, ticket_id, author, description) VALUES (?)";
+    "INSERT INTO ticket_comments (id, ticket_id, author, description) VALUES (?)";
   db.query(q, [comment], (err, data) => {
     if (err) {
       console.log(err);
@@ -29,8 +29,8 @@ ticketCommentsRouter.post("/", (req, res) => {
   console.log("comment added!");
 });
 
-ticketCommentsRouter.delete("/:comment_id", (req, res) => {
-  const q = `DELETE FROM ticket_comments WHERE comment_id = '${req.params.comment_id}'`;
+ticketCommentsRouter.delete("/:id", (req, res) => {
+  const q = `DELETE FROM ticket_comments WHERE id = '${req.params.id}'`;
   db.query(q, (err, data) => {
     if (err) {
       console.log(err);

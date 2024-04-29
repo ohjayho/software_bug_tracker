@@ -28,8 +28,8 @@ const Comments = ({ ticket_id }) => {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    const comment_id = uuidv4();
-    const newComment = [comment_id, ticket_id, currentUser, description];
+    const id = uuidv4();
+    const newComment = [id, ticket_id, currentUser, description];
     try {
       await axios.post("http://localhost:8800/ticket_comments", newComment);
       // this state variable is for re-rendering,
@@ -50,7 +50,7 @@ const Comments = ({ ticket_id }) => {
           return (
             <Comment
               comment={comment}
-              key={comment.comment_id}
+              key={comment.id}
               setRerender={setRerender}
             />
           );
