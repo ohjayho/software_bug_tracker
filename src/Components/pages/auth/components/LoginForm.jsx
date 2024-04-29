@@ -27,15 +27,13 @@ const LoginForm = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     if (!users.length) {
-      console.log("렝스", users.length);
       alert(`This account doesn't exist. Please check your account.`);
       return;
     }
-    const account = users.find((user) => user.id === username);
-    console.log(account);
+    const account = users.find((user) => user.username === username);
     if (account && account.pw === password) {
       localStorage.setItem("authenticated", true);
-      localStorage.setItem("currentUser", username);
+      localStorage.setItem("currentUser", account.first_name);
       navigate("/dashboard");
       location.reload();
     } else {

@@ -9,9 +9,12 @@ import {
   faPhone
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 const SignUpForm = (props) => {
-  const [id, setId] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setId] = useState("");
   const [pw, setPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
   const [email, setEmail] = useState("");
@@ -31,20 +34,24 @@ const SignUpForm = (props) => {
     existUsers();
   }, []);
 
-  const isUserExist = (id) => {
-    return existUser.some((user) => user.id === id);
+  const isUserExist = (username) => {
+    return existUser.some((user) => user.username === username);
   };
 
   const handleSignup = (e) => {
+    const id = uuidv4();
     e.preventDefault();
     if (pw !== confirmPw) {
       alert(`Passwords do not match. Please check your passwords`);
     } else {
-      if (!isUserExist(id)) {
+      if (!isUserExist(username)) {
         const createUser = async () => {
           try {
             await axios.post("http://localhost:8800/users", {
               id: id,
+              username: username,
+              first_name: firstName,
+              last_name: lastName,
               pw: pw,
               email: email,
               phone: phone
@@ -56,7 +63,7 @@ const SignUpForm = (props) => {
         createUser();
         setRegister(false);
       } else {
-        alert(`User name '${id}' already exists, please try again`);
+        alert(`User name '${username}' already exists, please try again`);
       }
     }
   };
@@ -66,14 +73,38 @@ const SignUpForm = (props) => {
       <form className="auth_form signup_form" onSubmit={handleSignup}>
         <h2 className="form_title signup_title">Sign Up</h2>
         <div className="form_container signup_form_container">
-          <div className="input_container signup_input_container input_id">
+          <div className="input_container signup_input_container input_first_name">
             <FontAwesomeIcon icon={faUser} />
             <input
               type="text"
-              name="id"
-              id="signup_id"
+              name="first_name"
+              id="signup_first_name"
               className="input_field signup_input_field"
-              placeholder="ID"
+              placeholder="First name"
+              required
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          </div>
+          <div className="input_container signup_input_container input_last_name">
+            <FontAwesomeIcon icon={faUser} />
+            <input
+              type="text"
+              name="last_name"
+              id="signup_last_name"
+              className="input_field signup_input_field"
+              placeholder="Last name"
+              required
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+          <div className="input_container signup_input_container input_username">
+            <FontAwesomeIcon icon={faUser} />
+            <input
+              type="text"
+              name="username"
+              id="signup_username"
+              className="input_field signup_input_field"
+              placeholder="Username"
               required
               onChange={(e) => setId(e.target.value)}
             />
@@ -121,7 +152,7 @@ const SignUpForm = (props) => {
               name="phone"
               id="signup_phone"
               className="input_field signup_input_field"
-              title="형식 010-0000-0000"
+              title="010-0000-0000"
               placeholder="Phone number"
               required
               pattern="(010)-\d{3,4}-\d{4}"

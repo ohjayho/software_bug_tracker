@@ -16,10 +16,11 @@ usersRouter.get("/", (req, res) => {
 });
 
 usersRouter.post("/", (req, res) => {
-  const q = "INSERT INTO users (id, pw, email, phone) VALUES (?)";
+  const q =
+    "INSERT INTO users (id, first_name, last_name, username, pw, email, phone) VALUES (?)";
 
-  const { id, pw, email, phone } = req.body;
-  const values = [id, pw, email, phone];
+  const { id, first_name, last_name, username, pw, email, phone } = req.body;
+  const values = [id, first_name, last_name, username, pw, email, phone];
 
   db.query(q, [values], (err, data) => {
     if (err) {
