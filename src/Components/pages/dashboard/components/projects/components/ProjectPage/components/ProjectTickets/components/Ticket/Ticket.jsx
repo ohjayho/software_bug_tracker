@@ -53,11 +53,7 @@ const Ticket = ({
           />,
           document.body
         )}
-      <tr
-        onClick={handleTicketClick}
-        className="ticket_table"
-        key={ticket.ticket_id}
-      >
+      <tr onClick={handleTicketClick} className="ticket_table" key={ticket.id}>
         <td>{ticket.title}</td>
         <td>{ticket.description}</td>
         <td>

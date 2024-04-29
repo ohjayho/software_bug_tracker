@@ -58,7 +58,7 @@ const SelectedTicket = ({ selectedTicket, selectedTicketOpen }) => {
               <AssignedDevs selectedTicket={selectedTicket} />
             </div>
           </div>
-          <Comments ticket_id={selectedTicket.ticket_id} />
+          <Comments ticket_id={selectedTicket.id} />
         </div>
       ) : (
         <div className="no_ticket_selected_ticket">

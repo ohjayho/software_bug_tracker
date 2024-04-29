@@ -31,7 +31,7 @@ const TicketModal = ({ setTicketModalOpen, team, project_id, ticket }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newTicket = {
-      ticket_id: ticket ? ticket.ticket_id : ticketId,
+      id: ticket ? ticket.id : ticketId,
       project_id: project_id,
       title: title,
       description: description,
@@ -47,7 +47,7 @@ const TicketModal = ({ setTicketModalOpen, team, project_id, ticket }) => {
       try {
         await axios.put("http://localhost:8800/project_tickets", newTicket);
         await axios.put(
-          `http://localhost:8800/ticket_devs/${ticket.ticket_id}`,
+          `http://localhost:8800/ticket_devs/${ticket.id}`,
           assignedDevs
         );
       } catch (err) {

@@ -68,7 +68,7 @@ const ProjectTickets = ({
                     ticket={ticket}
                     setSelectedTicket={setSelectedTicket}
                     setSelectedTicketOpen={setSelectedTicketOpen}
-                    key={ticket.ticket_id}
+                    key={ticket.id}
                     team={team}
                     project_id={project_id}
                   />

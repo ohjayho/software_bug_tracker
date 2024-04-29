@@ -29,9 +29,9 @@ projectTicketsRouter.get("/:project_id", (req, res) => {
 });
 
 projectTicketsRouter.post("/", (req, res) => {
-  const q = `INSERT INTO project_tickets (ticket_id, project_id, title, description, author, time_estimate, type, priority, status) VALUES (?)`;
+  const q = `INSERT INTO project_tickets (id, project_id, title, description, author, time_estimate, type, priority, status) VALUES (?)`;
   const {
-    ticket_id,
+    id,
     project_id,
     title,
     description,
@@ -43,7 +43,7 @@ projectTicketsRouter.post("/", (req, res) => {
   } = req.body;
 
   const values = [
-    ticket_id,
+    id,
     project_id,
     title,
     description,
@@ -65,17 +65,10 @@ projectTicketsRouter.post("/", (req, res) => {
 });
 
 projectTicketsRouter.put("/", (req, res) => {
-  const {
-    ticket_id,
-    title,
-    description,
-    time_estimate,
-    type,
-    priority,
-    status
-  } = req.body;
+  const { id, title, description, time_estimate, type, priority, status } =
+    req.body;
 
-  const q = `UPDATE project_tickets SET title = '${title}', description = '${description}', time_estimate = '${time_estimate}', type = '${type}', priority = '${priority}', status = '${status}' WHERE ticket_id = '${ticket_id}'`;
+  const q = `UPDATE project_tickets SET title = '${title}', description = '${description}', time_estimate = '${time_estimate}', type = '${type}', priority = '${priority}', status = '${status}' WHERE id = '${id}'`;
 
   db.query(q, (err, data) => {
     if (err) {
