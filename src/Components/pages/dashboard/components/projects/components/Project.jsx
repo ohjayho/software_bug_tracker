@@ -44,7 +44,7 @@ const Project = ({ project }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/dashboard/project/${project.project_id}`);
+    navigate(`/dashboard/project/${project.id}`);
   };
 
   const handleMenu = (e) => {
