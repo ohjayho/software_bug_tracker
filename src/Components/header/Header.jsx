@@ -9,7 +9,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
-  const [user, setUser] = useState(localStorage.getItem("currentUser"));
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("currentUser"))
+  );
+
   const authenticated = JSON.parse(localStorage.getItem("authenticated"));
   const navigate = useNavigate();
 
@@ -43,7 +46,7 @@ const Header = () => {
           <div className="user_container">
             {user && authenticated ? (
               <div className="logged_in">
-                <h4 className="logged_user">{user}</h4>
+                <h4 className="logged_user">{`${user.first_name} ${user.last_name}`}</h4>
                 <div className="btn_logout" onClick={handleLogut}>
                   Logout
                 </div>
