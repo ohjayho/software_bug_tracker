@@ -33,7 +33,7 @@ const LoginForm = () => {
     const account = users.find((user) => user.username === username);
     if (account && account.pw === password) {
       localStorage.setItem("authenticated", true);
-      localStorage.setItem("currentUser", account.first_name);
+      localStorage.setItem("currentUser", JSON.stringify(account));
       navigate("/dashboard");
       location.reload();
     } else {
