@@ -5,54 +5,16 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
 const ProjectModal = ({ setModalOpen, projectInfo }) => {
-  const [project, setProject] = useState({});
   const [name, setName] = useState(projectInfo ? projectInfo.name : "");
   const [description, setDescription] = useState(
     projectInfo ? projectInfo.description : ""
   );
-  const [members, setMembers] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]);
-  const [initialRender, setInitialRender] = useState(true);
-  const [initialRenderTwo, setInitialRenderTwo] = useState(true);
   const [currentUser, setCurrentUser] = useState(
-    localStorage.getItem("currentUser")
+    JSON.parse(localStorage.getItem("currentUser"))
   );
 
   const [uuid, setUuid] = useState(uuidv4());
-
-  // useEffect(() => {
-  //   if (initialRender) {
-  //     setInitialRender(false);
-  //     return;
-  //   }
-
-  //   const createNewProject = async () => {
-  //     try {
-  //       await axios.post("http://localhost:8800/projects", project);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-
-  //   createNewProject();
-  //   // localStorage.setItem("projects", JSON.stringify(projects));
-  // }, [project]);
-
-  // useEffect(() => {
-  //   if (initialRenderTwo) {
-  //     setInitialRenderTwo(false);
-  //     return;
-  //   }
-
-  //   const addMembersToProject = async () => {
-  //     try {
-  //       await axios.post("http://localhost:8800/project_members", members);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   addMembersToProject();
-  // }, [members]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,10 +23,8 @@ const ProjectModal = ({ setModalOpen, projectInfo }) => {
       id: projectInfo ? projectInfo.id : uuid,
       name: name,
       description: description,
-      author_id: currentUser
+      author_id: currentUser.id
     };
-    // setProject(newProject);
-    // setMembers(selectedMembers);
 
     //if edit mode
     if (projectInfo) {
