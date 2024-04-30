@@ -26,7 +26,7 @@ const TeamMember = ({ mb, project_id }) => {
 
   return (
     <tr key={mb.member}>
-      <td>{mb.member}</td>
+      <td>{`${mb.first_name} ${mb.last_name}`}</td>
       <td>{mb.email}</td>
       <td>
         <div className="last_column_table">

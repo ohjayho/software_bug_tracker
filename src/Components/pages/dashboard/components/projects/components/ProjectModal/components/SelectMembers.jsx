@@ -37,10 +37,9 @@ const SelectMembers = ({ setSelectedMembers, uuid }) => {
         required
       >
         {users.map((user) => {
-          // console.log("users", user.id);
           return (
-            <option value={user.id} key={user.id}>
-              {user.id}
+            <option value={user.id} key={user.first_name}>
+              {`${user.first_name} ${user.last_name}`}
             </option>
           );
         })}

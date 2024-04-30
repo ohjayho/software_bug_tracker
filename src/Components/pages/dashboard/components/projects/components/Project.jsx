@@ -66,7 +66,11 @@ const Project = ({ project }) => {
           <div className="contributors_table last_column_table">
             <div className="members_contributors">
               {contributors.map((contributor) => {
-                return <div key={contributor.member}>{contributor.member}</div>;
+                return (
+                  <div
+                    key={contributor.first_name}
+                  >{`${contributor.first_name} ${contributor.last_name}`}</div>
+                );
               })}
             </div>
             <div
