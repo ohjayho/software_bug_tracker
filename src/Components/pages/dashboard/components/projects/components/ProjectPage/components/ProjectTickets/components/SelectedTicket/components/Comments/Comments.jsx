@@ -8,7 +8,7 @@ const Comments = ({ ticket_id }) => {
   const [comments, setComments] = useState([]);
   const [description, setDescription] = useState("");
   const [currentUser, setCurrentUser] = useState(
-    localStorage.getItem("currentUser")
+    JSON.parse(localStorage.getItem("currentUser"))
   );
   const [rerender, setRerender] = useState(false);
 
@@ -29,7 +29,12 @@ const Comments = ({ ticket_id }) => {
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     const id = uuidv4();
-    const newComment = [id, ticket_id, currentUser, description];
+    const newComment = [
+      id,
+      ticket_id,
+      `${currentUser.first_name} ${currentUser.last_name}`,
+      description
+    ];
     try {
       await axios.post("http://localhost:8800/ticket_comments", newComment);
       // this state variable is for re-rendering,

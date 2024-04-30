@@ -15,7 +15,9 @@ const TicketModal = ({ setTicketModalOpen, team, project_id, ticket }) => {
   const [type, setType] = useState("ISSUE");
   const [priority, setPriority] = useState("URGENT");
   const [status, setStatus] = useState("TO DO");
-  const [author, setAuthor] = useState(localStorage.getItem("currentUser"));
+  const [author, setAuthor] = useState(
+    JSON.parse(localStorage.getItem("currentUser"))
+  );
   const [ticketId, setTicketId] = useState(uuidv4());
 
   const handleAssignDevs = (e) => {
@@ -35,7 +37,7 @@ const TicketModal = ({ setTicketModalOpen, team, project_id, ticket }) => {
       project_id: project_id,
       title: title,
       description: description,
-      author: author,
+      author: `${author.first_name} ${author.last_name}`,
       time_estimate: timeEstimate,
       type: type,
       priority: priority,
@@ -109,8 +111,8 @@ const TicketModal = ({ setTicketModalOpen, team, project_id, ticket }) => {
               <h2 className="title_assign_devs subtitle_modal">Assign Devs</h2>
               <select multiple onChange={handleAssignDevs} required>
                 {team.map((mb) => (
-                  <option value={mb.member} key={mb.member}>
-                    {mb.member}
+                  <option value={mb.user_id} key={mb.user_id}>
+                    {`${mb.first_name} ${mb.last_name}`}
                   </option>
                 ))}
               </select>
