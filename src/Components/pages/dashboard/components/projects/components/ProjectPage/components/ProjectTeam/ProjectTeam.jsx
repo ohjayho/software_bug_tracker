@@ -7,7 +7,6 @@ import TeamMember from "./components/TeamMember/TeamMember";
 import axios from "axios";
 
 const ProjectTeam = ({ project_id, team, setTeam }) => {
-  // const [team, setTeam] = useState([]);
   const [teamModalOpen, setTeamModalOpen] = useState(false);
 
   useEffect(() => {
