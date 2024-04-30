@@ -10,8 +10,11 @@ projectMembersRouter.use(cors());
 projectMembersRouter.get("/:project_id", (req, res) => {
   const members = `SELECT * FROM users u JOIN project_members pm ON u.id = pm.user_id WHERE pm.project_id='${req.params.project_id}' ;`;
   db.query(members, (err, data) => {
-    if (err) return res.json(err);
-    console.log(data);
+    if (err) {
+      console.log(err);
+      return res.json(err);
+    }
+
     return res.json(data);
   });
 });
