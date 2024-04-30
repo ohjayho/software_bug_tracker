@@ -9,7 +9,6 @@ const TeamModal = ({ notSelectedTeam, setTeamModalOpen, project_id }) => {
 
   const handleMembers = (e) => {
     let selected = [];
-    console.log("모달id", project_id);
     Array.prototype.forEach.call(e.target.options, function (opt) {
       if (opt.selected) {
         selected = [...selected, [project_id, opt.value]];
@@ -24,8 +23,6 @@ const TeamModal = ({ notSelectedTeam, setTeamModalOpen, project_id }) => {
       setInitialRender(false);
       return;
     }
-
-    console.log("뉴", newMembers);
 
     const uploadMembers = async () => {
       try {
@@ -67,7 +64,7 @@ const TeamModal = ({ notSelectedTeam, setTeamModalOpen, project_id }) => {
               {notSelectedTeam.map((nst) => {
                 return (
                   <option key={nst.id} value={nst.id}>
-                    {nst.id}
+                    {`${nst.first_name} ${nst.last_name}`}
                   </option>
                 );
               })}
