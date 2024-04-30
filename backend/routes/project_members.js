@@ -17,7 +17,7 @@ projectMembersRouter.get("/:project_id", (req, res) => {
 });
 
 projectMembersRouter.post("/", (req, res) => {
-  const q = "INSERT INTO project_members (project_id, member) VALUES ?";
+  const q = "INSERT INTO project_members (project_id, user_id) VALUES ?";
   const values = req.body;
   db.query(q, [values], (err, data) => {
     if (err) {
@@ -29,8 +29,8 @@ projectMembersRouter.post("/", (req, res) => {
 });
 
 projectMembersRouter.delete("/", (req, res) => {
-  const { project_id, member } = req.body;
-  const q = `DELETE FROM project_members WHERE project_id = '${project_id}' AND member = '${member}'`;
+  const { project_id, user_id } = req.body;
+  const q = `DELETE FROM project_members WHERE project_id = '${project_id}' AND user_id = '${user_id}'`;
   db.query(q, (err, data) => {
     if (err) {
       console.log(err);

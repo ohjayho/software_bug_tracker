@@ -58,7 +58,11 @@ const ProjectTeam = ({ project_id, team, setTeam }) => {
             {team.length > 0 &&
               team[0].map((mb) => {
                 return (
-                  <TeamMember key={mb.member} mb={mb} project_id={project_id} />
+                  <TeamMember
+                    key={mb.user_id}
+                    member={mb}
+                    project_id={project_id}
+                  />
                 );
               })}
           </tbody>

@@ -1,7 +1,7 @@
 import TeamDropDown from "../TeamDropDown/TeamDropDown";
 import { useState, useEffect, useRef } from "react";
 
-const TeamMember = ({ mb, project_id }) => {
+const TeamMember = ({ member, project_id }) => {
   const [teamDropDownOpen, setTeamDropDownOpen] = useState(false);
 
   let menuRef = useRef();
@@ -25,16 +25,16 @@ const TeamMember = ({ mb, project_id }) => {
   };
 
   return (
-    <tr key={mb.member}>
-      <td>{`${mb.first_name} ${mb.last_name}`}</td>
-      <td>{mb.email}</td>
+    <tr key={member.user_id}>
+      <td>{`${member.first_name} ${member.last_name}`}</td>
+      <td>{member.email}</td>
       <td>
         <div className="last_column_table">
-          <div className="members_contributors">{mb.phone}</div>
+          <div className="members_contributors">{member.phone}</div>
           <div className="menu_dots" onClick={handleTeamDropDown} ref={menuRef}>
             :
             {teamDropDownOpen && (
-              <TeamDropDown member={mb.member} project_id={project_id} />
+              <TeamDropDown user_id={member.user_id} project_id={project_id} />
             )}
           </div>
         </div>
