@@ -1,16 +1,14 @@
 import axios from "axios";
 import "./TicketDropDown.css";
 
-const TicketDropDown = ({ setModalOpen }) => {
+const TicketDropDown = ({ setModalOpen, ticket }) => {
   const handleEdit = () => {
     setModalOpen(true);
   };
 
   const handleDelete = async () => {
     try {
-      await axios.delete(
-        `http://localhost:8800/projects/${project.project_id}`
-      );
+      await axios.delete(`http://localhost:8800/project_tickets/${ticket.id}`);
     } catch (err) {
       console.log(err);
     }
@@ -26,7 +24,9 @@ const TicketDropDown = ({ setModalOpen }) => {
           </div>
         </div>
         <div className="delete_container">
-          <div className="btn_delete btns_dropdown">Delete</div>
+          <div className="btn_delete btns_dropdown" onClick={handleDelete}>
+            Delete
+          </div>
         </div>
       </div>
     </>

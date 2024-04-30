@@ -81,4 +81,15 @@ projectTicketsRouter.put("/", (req, res) => {
   console.log("successfully updated the ticket!");
 });
 
+projectTicketsRouter.delete("/:ticket_id", (req, res) => {
+  const q = `DELETE FROM project_tickets WHERE id = '${req.params.ticket_id}'`;
+  db.query(q, (err, data) => {
+    if (err) {
+      res.json(err);
+      console.log(err);
+    }
+    return res.json(data);
+  });
+});
+
 export default projectTicketsRouter;

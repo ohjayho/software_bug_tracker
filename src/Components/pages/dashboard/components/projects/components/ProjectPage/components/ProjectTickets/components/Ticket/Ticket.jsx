@@ -60,7 +60,10 @@ const Ticket = ({
           <div className="last_column_table">
             <div className="members_contributors">{ticket.author}</div>
             <h3 className="menu_dots" onClick={handleMenu} ref={menuRef}>
-              :{dropDownOpen && <TicketDropDown setModalOpen={setModalOpen} />}
+              :
+              {dropDownOpen && (
+                <TicketDropDown setModalOpen={setModalOpen} ticket={ticket} />
+              )}
             </h3>
           </div>
         </td>
