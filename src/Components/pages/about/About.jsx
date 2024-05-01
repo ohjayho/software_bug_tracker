@@ -16,7 +16,6 @@ const About = () => {
             <li>Assigning bug reports to team members</li>
             <li>Tracking the status of bug reports</li>
             <li>Commenting and discussing bug reports</li>
-            <li>Searching and filtering bug reports</li>
           </ul>
           <p>
             Our goal is to provide you with a user-friendly and efficient tool
