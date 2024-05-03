@@ -46,31 +46,33 @@ const Comments = ({ ticket_id }) => {
   };
 
   return (
-    <div className="comments_section_selected_ticket border_shadow_component">
-      <div className="header_comments_section">
-        <h1 className="title_comments_section">Comments</h1>
+    <div className="right_side_info_section">
+      <div className="comments_section_selected_ticket border_shadow_component">
+        <div className="header_comments_section">
+          <h1 className="title_comments_section">Comments</h1>
+        </div>
+        {comments.length > 0 &&
+          comments.map((comment) => {
+            return (
+              <Comment
+                comment={comment}
+                key={comment.id}
+                setRerender={setRerender}
+              />
+            );
+          })}
+        <form className="add_comment_section" onSubmit={handleCommentSubmit}>
+          <input
+            type="text"
+            className="input_add_comment"
+            name=""
+            id=""
+            placeholder="Enter comment"
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <button className="btn_add_comment btn_new">Comment</button>
+        </form>
       </div>
-      {comments.length > 0 &&
-        comments.map((comment) => {
-          return (
-            <Comment
-              comment={comment}
-              key={comment.id}
-              setRerender={setRerender}
-            />
-          );
-        })}
-      <form className="add_comment_section" onSubmit={handleCommentSubmit}>
-        <input
-          type="text"
-          className="input_add_comment"
-          name=""
-          id=""
-          placeholder="Enter comment"
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <button className="btn_add_comment btn_new">Comment</button>
-      </form>
     </div>
   );
 };

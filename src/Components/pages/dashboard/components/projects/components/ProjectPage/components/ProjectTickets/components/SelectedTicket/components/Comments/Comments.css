@@ -1,12 +1,16 @@
-.comments_section_selected_ticket {
+.right_side_info_section {
   width: 49%;
-  padding: 0 10px;
+}
+.comments_section_selected_ticket {
+  width: 100%;
+  padding: 10px 10px;
 }
 
 .comment {
   display: flex;
   flex-direction: column;
   padding: 10px 10px;
+  margin-bottom: 10px;
 }
 
 .header_comment {
@@ -23,6 +27,8 @@
 
 .title_comments_section {
   font-size: 18px;
+  margin: 0;
+  margin-bottom: 20px;
 }
 
 .author_comment {
