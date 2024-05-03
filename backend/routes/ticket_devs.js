@@ -8,7 +8,7 @@ ticketDevsRouter.use(express.json());
 ticketDevsRouter.use(cors());
 
 ticketDevsRouter.get("/:ticket_id", (req, res) => {
-  const devs = `SELECT assigned_dev FROM ticket_devs WHERE ticket_id='${req.params.ticket_id}';`;
+  const devs = `SELECT * FROM users u JOIN ticket_devs td ON td.ticket_id='${req.params.ticket_id}' WHERE td.assigned_dev = u.id;`;
   db.query(devs, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
@@ -16,9 +16,8 @@ ticketDevsRouter.get("/:ticket_id", (req, res) => {
 });
 
 ticketDevsRouter.post("/", (req, res) => {
-  const q = `INSERT INTO ticket_devs (ticket_id, assigned_dev) VALUES ?`;
+  const q = `INSERT IGNORE INTO ticket_devs (ticket_id, assigned_dev) VALUES ?`;
   const devs = req.body;
-  console.log("devs", [devs]);
   db.query(q, [devs], (err, data) => {
     if (err) {
       console.log(err);
@@ -29,12 +28,13 @@ ticketDevsRouter.post("/", (req, res) => {
   console.log("devs added successfully!");
 });
 
-ticketDevsRouter.put("/:ticket_id", (req, res) => {
-  const devs = [req.body.map((dev) => dev[1])];
+ticketDevsRouter.delete("/:ticket_id", (req, res) => {
+  const devs = req.body.map((dev) =>
+    JSON.stringify(dev[1]).replaceAll('"', "'")
+  );
   const ticket_id = req.params.ticket_id;
-  const q = `UPDATE ticket_devs SET assigned_dev = '${devs}' WHERE ticket_id = '${ticket_id}'`;
-  console.log(q);
-  db.query(q, [devs], (err, data) => {
+  const q = `DELETE FROM ticket_devs WHERE ticket_id = '${ticket_id}' AND assigned_dev NOT IN (${devs})`;
+  db.query(q, (err, data) => {
     if (err) {
       console.log(err);
       return res.json(err);
