@@ -31,6 +31,11 @@ th {
   text-align: left;
 }
 
+.table_info th,
+td:not(:nth-child(2n)) {
+  padding-right: 40px;
+}
+
 .ticket_tags {
   display: inline;
   border-radius: 11px;
