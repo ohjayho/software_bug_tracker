@@ -10,7 +10,8 @@ import {
 
 const Header = () => {
   const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("currentUser"))
+    localStorage.getItem("currentUser") &&
+      JSON.parse(localStorage.getItem("currentUser"))
   );
 
   const authenticated = JSON.parse(localStorage.getItem("authenticated"));
