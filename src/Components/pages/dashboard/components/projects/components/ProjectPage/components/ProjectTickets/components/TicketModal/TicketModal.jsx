@@ -24,7 +24,7 @@ const TicketModal = ({ setTicketModalOpen, team, project_id, ticket }) => {
     let selected = [];
     Array.prototype.forEach.call(e.target.options, function (opt) {
       if (opt.selected) {
-        selected.push([ticketId, opt.value]);
+        selected.push([ticket ? ticket.id : ticketId, opt.value]);
       }
     });
     setAssignedDevs(selected);
@@ -48,10 +48,10 @@ const TicketModal = ({ setTicketModalOpen, team, project_id, ticket }) => {
       // if edit mode
       try {
         await axios.put("http://localhost:8800/project_tickets", newTicket);
-        await axios.put(
-          `http://localhost:8800/ticket_devs/${ticket.id}`,
-          assignedDevs
-        );
+        await axios.post(`http://localhost:8800/ticket_devs`, assignedDevs);
+        await axios.delete(`http://localhost:8800/ticket_devs/${ticket.id}`, {
+          data: assignedDevs
+        });
       } catch (err) {
         console.log(err);
       }
