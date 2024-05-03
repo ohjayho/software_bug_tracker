@@ -9,7 +9,7 @@ const AssignedDevs = ({ selectedTicket }) => {
     const getAssignedDevs = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8800/ticket_devs/${selectedTicket.ticket_id}`
+          `http://localhost:8800/ticket_devs/${selectedTicket.id}`
         );
         setDevs(res.data);
       } catch (err) {
@@ -22,8 +22,8 @@ const AssignedDevs = ({ selectedTicket }) => {
     <div className="devs_container">
       {devs.map((dev) => {
         return (
-          <div className="assigned_dev" key={dev.assigned_dev}>
-            {dev.assigned_dev}
+          <div className="assigned_dev" key={dev.first_name}>
+            {`${dev.first_name} ${dev.last_name}`}
           </div>
         );
       })}
