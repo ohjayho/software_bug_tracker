@@ -69,7 +69,7 @@ td {
 }
 
 .table_components td {
-  padding: 0 20px;
+  padding: 15px 20px;
 }
 
 td[colspan]:not([colspan="1"]) {
