@@ -7,7 +7,7 @@ const projectTicketsRouter = express.Router();
 projectTicketsRouter.use(express.json());
 projectTicketsRouter.use(cors());
 
-projectTicketsRouter.get("/", (req, res) => {
+projectTicketsRouter.get("/statistics", (req, res) => {
   const type =
     "SELECT type, count(author) AS cnt FROM project_tickets GROUP BY type;";
   const status =

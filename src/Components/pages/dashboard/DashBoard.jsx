@@ -10,7 +10,9 @@ const DashBoard = () => {
   useEffect(() => {
     const getTickets = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/project_tickets");
+        const res = await axios.get(
+          "http://localhost:8800/project_tickets/statistics"
+        );
         setTickets(res.data);
       } catch (err) {
         console.log(err);
