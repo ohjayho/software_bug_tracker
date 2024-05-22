@@ -1,0 +1,7 @@
+.tickets_container {
+  width: 90vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}

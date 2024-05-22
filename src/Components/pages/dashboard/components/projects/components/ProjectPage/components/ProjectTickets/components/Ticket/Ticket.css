@@ -1,3 +1,8 @@
 .ticket_table {
   cursor: pointer;
 }
+
+.ticket_table:hover {
+  background-color: #33a70f;
+  color: white;
+}

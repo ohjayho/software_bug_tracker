@@ -7,6 +7,7 @@ import Auth from "./Components/pages/auth/Auth.jsx";
 import MainLayout from "./Components/MainLayout.jsx";
 import { useState } from "react";
 import ProjectPage from "./Components/pages/dashboard/components/projects/components/ProjectPage/ProjectPage.jsx";
+import Tickets from "./Components/pages/tickets/Tickets.jsx";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -31,6 +32,10 @@ function App() {
           <Route
             path="/dashboard"
             element={<AuthenticatedRoute Component={DashBoard} />}
+          />
+          <Route
+            path="/tickets"
+            element={<AuthenticatedRoute Component={Tickets} />}
           />
           <Route
             path="/dashboard/project/:project_id"

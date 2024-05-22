@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBug,
   faChalkboard,
-  faCircleInfo
+  faCircleInfo,
+  faTicket
 } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
@@ -41,6 +42,9 @@ const Header = () => {
           </NavLink>
           <NavLink to="/dashboard" className="menu btn_dashboard">
             <FontAwesomeIcon icon={faChalkboard} /> Dashboard
+          </NavLink>
+          <NavLink to="/tickets" className="menu btn_dashboard">
+            <FontAwesomeIcon icon={faTicket} /> Tickets
           </NavLink>
         </div>
         <div className="menu_container">
