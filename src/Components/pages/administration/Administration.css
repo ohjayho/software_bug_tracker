@@ -1,0 +1,108 @@
+.administration_container {
+  width: 90vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+.administration_content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.organization_container {
+  width: 54%;
+}
+
+.table_administration_wrapper {
+  padding: 20px 15px;
+}
+
+.table_administration {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table_administration td {
+  border: 1px solid #f0f0f0;
+  padding: 15px 15px;
+}
+
+.table_administration td:hover {
+  background-color: #33a70f;
+  color: white;
+  cursor: pointer;
+}
+
+.header_organization_container {
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.edit_user_information_container {
+  width: 45%;
+}
+
+.header_edit_user_information {
+  border-bottom: 1px solid #f2f2f2;
+}
+.user_information_wrapper {
+  padding: 15px 20px;
+}
+
+.user_information_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.user_information_container input {
+  border: 1px solid #c0c0c0;
+}
+
+.user_name {
+  margin: 0;
+}
+
+.user_first_section,
+.user_second_section,
+.user_third_section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.first_name_container,
+.last_name_container,
+.phone_container,
+.authorization_container {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+  margin-top: 15px;
+}
+
+.email_container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.user_button_section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn_user_info {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.btn_remove {
+  background-color: #cc4b60;
+  height: 32px;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}

@@ -40,8 +40,13 @@ header a {
 
 .menu {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
+}
+
+.menu svg {
+  width: 20px;
+  margin-right: 5px;
 }
 
 .menu:not(:last-child) {

@@ -6,6 +6,7 @@ import {
   faBug,
   faChalkboard,
   faCircleInfo,
+  faPeopleGroup,
   faTicket
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -43,8 +44,11 @@ const Header = () => {
           <NavLink to="/dashboard" className="menu btn_dashboard">
             <FontAwesomeIcon icon={faChalkboard} /> Dashboard
           </NavLink>
-          <NavLink to="/tickets" className="menu btn_dashboard">
+          <NavLink to="/tickets" className="menu btn_tickets">
             <FontAwesomeIcon icon={faTicket} /> Tickets
+          </NavLink>
+          <NavLink to="/administration" className="menu btn_administration">
+            <FontAwesomeIcon icon={faPeopleGroup} /> Administration
           </NavLink>
         </div>
         <div className="menu_container">
