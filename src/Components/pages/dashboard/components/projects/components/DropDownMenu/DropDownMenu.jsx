@@ -1,17 +1,23 @@
 import "./DropDownMenu.css";
 import axios from "axios";
 
-const DropDownMenu = ({ project, setModalOpen }) => {
+const DropDownMenu = ({
+  project,
+  setModalOpen,
+  setIsEdit,
+  handleDeleteProject
+}) => {
   const handleEdit = async () => {
+    setIsEdit(true);
     setModalOpen(true);
   };
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:8800/projects/${project.id}`);
+      handleDeleteProject(project.id);
     } catch (err) {
       console.log(err);
     }
-    location.reload();
   };
 
   return (

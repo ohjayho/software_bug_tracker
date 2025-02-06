@@ -4,7 +4,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
-const ProjectModal = ({ setModalOpen, projectInfo }) => {
+const ProjectModal = ({
+  setModalOpen,
+  setContributors,
+  projectInfo,
+  handleNewProject
+}) => {
   const [name, setName] = useState(projectInfo ? projectInfo.name : "");
   const [description, setDescription] = useState(
     projectInfo ? projectInfo.description : ""
@@ -43,13 +48,13 @@ const ProjectModal = ({ setModalOpen, projectInfo }) => {
           "http://localhost:8800/project_members",
           selectedMembers
         );
+        handleNewProject(newProject);
+        setContributors(selectedMembers);
         setModalOpen(false);
       } catch (err) {
         console.log(err);
       }
     }
-
-    location.reload();
   };
 
   return (

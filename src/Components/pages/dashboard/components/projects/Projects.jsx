@@ -2,9 +2,7 @@ import "../../components.css";
 import "./Projects.css";
 import "./components/Project";
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import Project from "./components/Project";
-import ProjectModal from "./components/ProjectModal/ProjectModal";
 import axios from "axios";
 
 const Projects = () => {
@@ -24,13 +22,29 @@ const Projects = () => {
     fetchAllProjects();
   }, []);
 
+  const handleNewProject = (newProject) => {
+    setProjects((prevProjects) => [newProject, ...prevProjects]);
+  };
+
+  const handleEditProject = (editedProject) => {
+    setProjects((prevProjects) =>
+      prevProjects.map((prevProject) => {
+        if (prevProject.id === editedProject.id) {
+          prevProject.name = editedProject.name;
+          prevProject.description = editedProject.description;
+        }
+      })
+    );
+  };
+
+  const handleDeleteProject = (projectId) => {
+    setProjects((prevProjects) =>
+      prevProjects.filter((project) => project.id !== projectId)
+    );
+  };
+
   return (
     <>
-      {modalOpen &&
-        createPortal(
-          <ProjectModal setModalOpen={setModalOpen} />,
-          document.body
-        )}
       <div className="projects_container components_container border_shadow_component">
         <div className="header_projects header_components">
           <h1 className="title_projects title_header">Projects</h1>
@@ -52,7 +66,16 @@ const Projects = () => {
           <tbody>
             {projects.length ? (
               projects.map((prj) => {
-                return <Project project={prj} key={prj.id} />;
+                return (
+                  <Project
+                    project={prj}
+                    key={prj.id}
+                    handleDeleteProject={handleDeleteProject}
+                    handleNewProject={handleNewProject}
+                    modalOpen={modalOpen}
+                    setModalOpen={setModalOpen}
+                  />
+                );
               })
             ) : (
               <tr>

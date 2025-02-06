@@ -35,7 +35,6 @@ const LoginForm = () => {
       localStorage.setItem("authenticated", true);
       localStorage.setItem("currentUser", JSON.stringify(account));
       navigate("/dashboard");
-      location.reload();
     } else {
       alert(`This account doesn't exist. Please check your account.`);
     }

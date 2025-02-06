@@ -62,6 +62,7 @@ const ProjectTeam = ({ project_id, team, setTeam }) => {
                     key={mb.user_id}
                     member={mb}
                     project_id={project_id}
+                    setTeam={setTeam}
                   />
                 );
               })}

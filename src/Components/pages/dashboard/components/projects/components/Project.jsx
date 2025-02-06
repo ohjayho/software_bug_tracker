@@ -6,10 +6,16 @@ import "./Project.css";
 import DropDownMenu from "./DropDownMenu/DropDownMenu";
 import ProjectModal from "./ProjectModal/ProjectModal";
 
-const Project = ({ project }) => {
+const Project = ({
+  project,
+  modalOpen,
+  setModalOpen,
+  handleDeleteProject,
+  handleNewProject
+}) => {
   const [contributors, setContributors] = useState([]);
   const [dropDownMenuOpen, setDropDownMenuOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
     const getContributors = async () => {
@@ -56,7 +62,12 @@ const Project = ({ project }) => {
     <>
       {modalOpen &&
         createPortal(
-          <ProjectModal setModalOpen={setModalOpen} projectInfo={project} />,
+          <ProjectModal
+            setModalOpen={setModalOpen}
+            setContributors={setContributors}
+            projectInfo={isEdit ? project : null}
+            handleNewProject={handleNewProject}
+          />,
           document.body
         )}
       <tr className="project_table" onClick={handleClick}>
@@ -65,10 +76,10 @@ const Project = ({ project }) => {
         <td>
           <div className="contributors_table last_column_table">
             <div className="members_contributors">
-              {contributors.map((contributor) => {
+              {contributors.map((contributor, idx) => {
                 return (
                   <div
-                    key={contributor.first_name}
+                    key={idx}
                   >{`${contributor.first_name} ${contributor.last_name}`}</div>
                 );
               })}
@@ -80,7 +91,12 @@ const Project = ({ project }) => {
             >
               :
               {dropDownMenuOpen && (
-                <DropDownMenu project={project} setModalOpen={setModalOpen} />
+                <DropDownMenu
+                  project={project}
+                  setModalOpen={setModalOpen}
+                  setIsEdit={setIsEdit}
+                  handleDeleteProject={handleDeleteProject}
+                />
               )}
             </div>
           </div>

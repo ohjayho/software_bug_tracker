@@ -1,5 +1,5 @@
 import { Link, useNavigate, NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,22 +11,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
-  const [user, setUser] = useState(
-    localStorage.getItem("currentUser") &&
-      JSON.parse(localStorage.getItem("currentUser"))
-  );
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("currentUser");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
-  const authenticated = JSON.parse(localStorage.getItem("authenticated"));
+  const [authenticated, setAuthenticated] = useState(() => {
+    return JSON.parse(localStorage.getItem("authenticated") || false);
+  });
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    navigate("/login");
+    navigate("/auth");
   };
   const handleLogut = () => {
-    localStorage.setItem("authenticated", false);
-    localStorage.setItem("currentUser", "");
-    navigate("/login");
-    location.reload();
+    localStorage.removeItem("authenticated");
+    localStorage.removeItem("currentUser");
+    setAuthenticated(false);
+    setUser(null);
+    navigate("/auth");
   };
 
   return (
